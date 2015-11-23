@@ -14,7 +14,7 @@ var config = {
   ],
   output : {
     path      : __dirname + '/static/',
-    publicPath: '/static/',
+    publicPath: 'http://localhost:3000/static/',
     filename  : 'bundle.js',
     hot       : true
   },

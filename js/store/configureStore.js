@@ -7,7 +7,7 @@ let createStoreWithMiddleware
 // Configure the dev tools when in DEV mode
 if (__DEV__) {
   let { persistState } = require('redux-devtools')
-  let DevTools = require('../containers/DevTools')
+  let DevTools = require('../containers/DevTools')()
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
     DevTools.instrument(),
