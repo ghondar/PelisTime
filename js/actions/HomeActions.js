@@ -1,4 +1,4 @@
-import {TITLE_CHANGED} from '../constants/ActionTypes';
+import { TITLE_CHANGED } from '../constants/ActionTypes'
 
 export function changeTitle(text) {
   return {

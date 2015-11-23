@@ -1,38 +1,41 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-});
+})
 
 var config = {
-  entry: [
+  entry  : [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './js/index.js'
   ],
-  output: {
-    path: __dirname + '/static/',
+  output : {
+    path      : __dirname + '/static/',
     publicPath: '/static/',
-    filename: 'bundle.js',
-    hot: true
+    filename  : 'bundle.js',
+    hot       : true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin("app.css")
+    new ExtractTextPlugin('app.css')
   ],
-  module: {
+  module : {
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') }
+      { test: /\.js$/,
+ loaders    : [ 'react-hot', 'babel' ],
+ exclude    : /node_modules/ },
+      { test: /\.css$/,
+ loader     : ExtractTextPlugin.extract('css-loader?module!cssnext-loader') }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.json']
+    extensions: [ '', '.js', '.json' ]
   }
-};
+}
 
-module.exports = config;
+module.exports = config
