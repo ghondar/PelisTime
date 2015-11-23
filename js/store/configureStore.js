@@ -6,10 +6,11 @@ let createStoreWithMiddleware;
 
 // Configure the dev tools when in DEV mode
 if (__DEV__) {
-  let {devTools, persistState} = require('redux-devtools');
+  let {persistState} = require('redux-devtools');
+  let DevTools = require('../containers/DevTools');
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
-    devTools(),
+    DevTools.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   )(createStore);
 } else {
