@@ -13,13 +13,16 @@
   "dependencies": {
     "babel-runtime": "^5.8.20",
     "lodash": "^3.10.1",
+    "material-ui": "^0.13.3",
     "react": "^0.14.3",
+    "react-addons-css-transition-group": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
+    "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.4",
     "redux-devtools": "^3.0.0-beta-3",
-    "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
+    "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "redux-thunk": "^1.0.0"
   },
   "repository": {

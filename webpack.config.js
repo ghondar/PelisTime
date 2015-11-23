@@ -26,15 +26,19 @@ var config = {
   ],
   module : {
     loaders: [
-      { test: /\.js$/,
- loaders    : [ 'react-hot', 'babel' ],
- exclude    : /node_modules/ },
-      { test: /\.css$/,
- loader     : ExtractTextPlugin.extract('css-loader?module!cssnext-loader') }
+      {
+        test   : /\.js$/,
+        loaders: [ 'react-hot', 'babel' ],
+        exclude: /node_modules/
+      },
+      {
+        test  : /\.css$/,
+        loader: ExtractTextPlugin.extract('css?module!cssnext-loader')
+      }
     ]
   },
   resolve: {
-    extensions: [ '', '.js', '.json' ]
+    extensions: [ '', '.jsx', '.js', '.json' ]
   }
 }
 
