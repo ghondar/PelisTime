@@ -1,0 +1,22 @@
+.lista {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.paper {
+  cursor: pointer;
+  padding: 1px;
+  width: 340px;
+}
+
+@media (max-width: 340px) {
+  .lista{
+    margin: 0 2px 2px 2px;
+  }
+}
+
+@media (max-width: 765px) {
+  .paper{
+    width: 100%;
+  }
+}
