@@ -40,6 +40,18 @@ var config = {
       {
         test  : /\.css$/,
         loader: ExtractTextPlugin.extract('css?module!cssnext-loader')
+      },
+      {
+        test  : /\.png$/,
+        loader: 'file-loader?limit=10000&minetype=image/png'
+      },
+      {
+        test  : /\.jpg$/,
+        loader: 'file-loader?limit=10000&minetype=image/jpg'
+      },
+      {
+        test  : /\.gif$/,
+        loader: 'file-loader'
       }
     ]
   },

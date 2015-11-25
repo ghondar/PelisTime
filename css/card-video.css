@@ -6,7 +6,6 @@
 .paper {
   cursor: pointer;
   padding: 1px;
-  width: 340px;
 }
 
 @media (max-width: 340px) {

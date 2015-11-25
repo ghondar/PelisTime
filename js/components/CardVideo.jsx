@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Card, Paper, CardMedia, CardTitle } from 'material-ui'
 
+import ImagePreloader from '../components/ImagePreloader'
+
 import Style from '../../css/card-video.css'
+import noImage from '../../img/no-image.jpg'
 
 export default class CardVideo extends Component{
 
@@ -23,7 +26,7 @@ export default class CardVideo extends Component{
           className={Style.paper}>
           <Card>
             <CardMedia overlay={<CardTitle title={video.name}/>}>
-              <img src={video.cover_url}/>
+              <ImagePreloader src={video.cover_url} fallback={noImage}/>
             </CardMedia>
           </Card>
         </Paper>
