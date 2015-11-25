@@ -10,7 +10,7 @@ var config = {
   entry  : [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './js/index.js'
+    './js/index.jsx'
   ],
   output : {
     path      : __dirname + '/static/',
@@ -27,8 +27,14 @@ var config = {
   module : {
     loaders: [
       {
-        test   : /\.js$/,
+        test   :  /\.jsx$/,
         loaders: [ 'react-hot', 'babel' ],
+        exclude: /node_modules/
+      },
+      {
+        test   : /\.js$/,
+        loaders: [ 'babel' ],
+        include: path.join(__dirname, 'js'),
         exclude: /node_modules/
       },
       {

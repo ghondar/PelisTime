@@ -12,7 +12,8 @@ import RaisedButton from 'material-ui/lib/raised-button'
 // Custom components
 import ListVideo from './ListVideo'
 
-class Home extends Component {
+@connect(state => state)
+export default class Home extends Component {
 
   constructor(props, context) {
     super(props, context)
@@ -50,5 +51,3 @@ class Home extends Component {
   }
 
 }
-
-export default connect(state => state)(Home)
