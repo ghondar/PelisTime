@@ -3,10 +3,10 @@ import request from 'superagent'
 
 const API_ROOT = 'http://api-ghondar.jit.su'
 
-export function fetchList() {
+export function fetchList(page) {
   var deferred = Q.defer()
   request
-    .get(`${API_ROOT}/movies/releases/`)
+    .get(`${API_ROOT}/movies/releases/?page=${page}`)
     .set('Accept', 'application/json')
     .end((err, res) => {
       if(err)

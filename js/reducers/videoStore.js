@@ -16,10 +16,13 @@ let defaultState = {
 export default function(state = defaultState, action) {
   switch (action.type) {
     case ActionTypes.CARGAR_VIDEOS:
-      return {
-        ...state,
-        ...action.json
-      }
+      return Object.assign({}, state, action.json)
+
+    case ActionTypes.AGREGAR_VIDEOS:
+      return Object.assign({}, state, {
+        meta: action.json.meta,
+        data: [ ...state.data, ...action.json.data ]
+      })
     default:
       return state
   }

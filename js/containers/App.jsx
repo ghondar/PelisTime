@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import configureStore from '../store/configureStore'
-import routes from '../routes/routes'
+import routes from '../routes/routes.jsx'
 
 const store = configureStore()
 

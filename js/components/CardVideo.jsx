@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Card, Paper, CardMedia, CardTitle } from 'material-ui'
 
-import ImagePreloader from '../components/ImagePreloader'
+import ImagePreloader from '../components/ImagePreloader.jsx'
 
 import Style from '../../css/card-video.css'
 import noImage from '../../img/no-image.jpg'

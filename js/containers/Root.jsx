@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import devTools from './DevTools'
+import devTools from './DevTools.jsx'
 
 export default class Root extends Component{
   render() {
@@ -7,7 +7,7 @@ export default class Root extends Component{
     return (
       <div>
         {this.props.children}
-        <DevTools />
+        {DevTools ? <DevTools/> : null }
       </div>
     )
   }
