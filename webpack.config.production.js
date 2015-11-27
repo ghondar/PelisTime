@@ -65,23 +65,23 @@ module.exports = {
     }),
 
     // ignore dev config
-    // new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+    new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // set global vars
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     // Useful to reduce the size of client-side libraries, e.g. react
-    //     NODE_ENV: JSON.stringify('production')
-    //   }
-    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        // Useful to reduce the size of client-side libraries, e.g. react
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
 
     // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin()
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //       warnings: false
-    //     }
-    // })
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+          warnings: false
+        }
+    })
   ]
 }
