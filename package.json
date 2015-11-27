@@ -1,7 +1,7 @@
 {
-  "name": "my-electron-redux-boilerplate",
+  "name": "PelisTime",
   "version": "0.1.0",
-  "description": "Electron application boilerplate based on React, Redux, Redux DevTools, Webpack, Bootstrap.",
+  "description": "PelisTime basado en peerflix, empaquetado con electron.",
   "main": "index.js",
   "scripts": {
     "start-server": "node server.js",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
+    "electron-compile": "^1.0.1",
     "lodash": "^3.10.1",
     "material-ui": "^0.13.3",
     "q": "^1.4.1",
@@ -29,22 +30,16 @@
     "redux-thunk": "^1.0.0",
     "superagent": "^1.4.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/proshunsuke/my-electron-redux-boilerplate"
-  },
   "author": {
-    "name": "pro_shunsuke",
-    "email": "shunsuke@gmail.com",
-    "url": "https://twitter.com/pro_shunsuke"
+    "name": "Ghondar",
+    "email": "abgv9221@gmail.com",
+    "url": "https://github.com/ghondar"
   },
-  "license": "MIT",
   "keywords": [
     "electron",
-    "boilerplate",
+    "pelistime",
     "react",
-    "redux",
-    "webpack"
+    "redux"
   ],
   "devDependencies": {
     "babel-core": "^5.8.23",
@@ -53,7 +48,9 @@
     "clean-webpack-plugin": "^0.1.4",
     "css-loader": "^0.17.0",
     "cssnext-loader": "^1.0.1",
+    "electron-compilers": "^1.0.1",
     "electron-packager": "^5.1.0",
+    "electron-prebuilt": "^0.35.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.5",
     "jsx-loader": "^0.13.2",
