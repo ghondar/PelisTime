@@ -22,7 +22,9 @@ var config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    })
   ],
   module : {
     loaders: [

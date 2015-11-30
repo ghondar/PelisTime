@@ -15,8 +15,11 @@ export default function(InnerComponent) {
     }
 
     onScroll() {
-      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)) {
-        this.props.scrollFunc()
+      const { fetchVideos, currentPage, loading } = this.props
+
+      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+        if(!loading)
+          fetchVideos(currentPage + 1)
       }
     }
 
@@ -26,7 +29,9 @@ export default function(InnerComponent) {
   }
 
   InfiniteScrollComponent.propTypes = {
-    scrollFunc: PropTypes.func.isRequired
+    fetchVideos: PropTypes.func.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    loading    : PropTypes.bool.isRequired
   }
 
   return InfiniteScrollComponent

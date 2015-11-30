@@ -16,7 +16,8 @@ export default class Dashboard extends Component{
   componentWillMount() {
     const { dispatch } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    actions.fetchVideos()
+    if(!this.props.videoStore.meta.current_page)
+      actions.fetchVideos(1)
   }
 
   render() {
@@ -24,7 +25,12 @@ export default class Dashboard extends Component{
     const actions = bindActionCreators(videoActions, dispatch)
     return (
       <main>
-        <ListVideo videos={this.props.videoStore.data} scrollFunc={actions.fetchVideosIfNeeded.bind(null, this.props.videoStore.meta.current_page + 1)}/>
+        <ListVideo
+          videos={this.props.videoStore.data}
+          currentPage={this.props.videoStore.meta.current_page}
+          loading={this.props.videoStore.Loading}
+          {...actions}
+          {...this.props}/>
       </main>
     )
   }

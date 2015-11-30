@@ -11,6 +11,9 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import CircularProgress from 'material-ui/lib/circular-progress'
 // import RaisedButton from 'material-ui/lib/raised-button'
 
+// CSS Styles
+import grid from '../../css/grid.css'
+
 const Masonry = masonry(React)
 
 class ListVideo extends Component{
@@ -105,23 +108,39 @@ class ListVideo extends Component{
     }
   }
 
+  renderVideos(start, end) {
+    const chunk = 5
+    const { videos } = this.props
+    let result = []
+
+    for (let i = start; i < end; i += chunk) {
+      let videoList = videos.slice(i, i + chunk).map((video, j) => (
+          <div className={grid[ 'col-1-5' ]} styleName='clearfix' key={video.id}>
+            <CardVideo video={video} history={this.props.history}/>
+          </div>
+        )
+      )
+      result.push(videoList)
+    }
+
+    return result
+  }
+
   render() {
-    const childElements = this.props.videos.map(video => (
-      <CardVideo key={video.id} video={video}/>
-    ))
+    const { videos } = this.props
+    const { end, paddingBottom, paddingTop, start } = this.state
+
     return (
       <Masonry
         ref='masonry'
         elementType={'ul'}
-        disableImagesLoaded={false}
-        scrollFunc={::this._handleScrollFunc}>
-        {childElements.length ? childElements : <CircularProgress mode='indeterminate' color={'red'} size={2} />}
+        disableImagesLoaded={false}>
+        <div className={grid.padder} style={{ height: paddingTop }}></div>
+          {this.renderVideos(start, end)}
+        <div className={grid.padder} style={{ height: paddingBottom }}></div>
+        {this.props.videoStore.Loading ? <CircularProgress mode='indeterminate' size={2} /> : null}
       </Masonry>
     )
-  }
-
-  _handleScrollFunc() {
-    debugger
   }
 }
 

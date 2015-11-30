@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 
-// Material components
+// Material Compoennts
 import RaisedButton from 'material-ui/lib/raised-button'
 
-export default class Page2 extends Component{
+export default class DetailsVideo extends Component{
 
   constructor(props, context) {
     super(props, context)
@@ -12,16 +12,16 @@ export default class Page2 extends Component{
   render() {
     return (
       <div>
-        <h1>pagina 2</h1>
+        <h1>Hola Detalle</h1>
         <RaisedButton
-          label='ir a pagina 1'
+          label='Atras'
           secondary={true}
-          onClick={::this._handleClick}/>
+          onTouchTap={::this._handleBack}/>
       </div>
     )
   }
 
-  _handleClick(e) {
+  _handleBack(e) {
     this.props.history.goBack()
   }
 }
