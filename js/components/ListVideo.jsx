@@ -3,7 +3,8 @@ import masonry from 'react-masonry-component'
 import InfiniteScrollify from './InfiniteScrollify.jsx'
 
 // Custom components
-import CardVideo from '../components/CardVideo.jsx'
+import CardVideo from './CardVideo.jsx'
+import Spinner from './Spinner.jsx'
 
 // Material components
 import GridList from 'material-ui/lib/grid-list/grid-list'
@@ -12,7 +13,8 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 // import RaisedButton from 'material-ui/lib/raised-button'
 
 // CSS Styles
-import grid from '../../css/grid.css'
+import '../../css/grid.css'
+import '../../css/videos.css'
 
 const Masonry = masonry(React)
 
@@ -61,7 +63,7 @@ class ListVideo extends Component{
     const { height, videos } = props
 
     const MARGIN_TOP = 20
-    const ROW_HEIGHT = 132
+    const ROW_HEIGHT = 445
     const ITEMS_PER_ROW = 5
     const scrollY = window.scrollY
     let paddingTop = 0
@@ -92,7 +94,7 @@ class ListVideo extends Component{
     }
   }
 
-  onScroll() {
+  onScroll(e) {
     const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props)
 
     if (paddingTop !== this.state.paddingTop
@@ -115,12 +117,14 @@ class ListVideo extends Component{
 
     for (let i = start; i < end; i += chunk) {
       let videoList = videos.slice(i, i + chunk).map((video, j) => (
-          <div className={grid[ 'col-1-5' ]} styleName='clearfix' key={video.id}>
-            <CardVideo video={video} history={this.props.history}/>
+          <div className='col-1-5 clearfix' key={video.id}>
+            <div className='video'>
+              <CardVideo video={video} history={this.props.history}/>
+            </div>
           </div>
         )
       )
-      result.push(videoList)
+      result.push(<div className='videos-row grid' key={'videos-row-' + i}>{videoList}</div>)
     }
 
     return result
@@ -134,11 +138,12 @@ class ListVideo extends Component{
       <Masonry
         ref='masonry'
         elementType={'ul'}
+        className='content'
         disableImagesLoaded={false}>
-        <div className={grid.padder} style={{ height: paddingTop }}></div>
+        <div className='padder' style={{ height: paddingTop }}></div>
           {this.renderVideos(start, end)}
-        <div className={grid.padder} style={{ height: paddingBottom }}></div>
-        {this.props.videoStore.Loading ? <CircularProgress mode='indeterminate' size={2} /> : null}
+        <div className='padder' style={{ height: paddingBottom }}></div>
+        {this.props.videoStore.Loading ? <Spinner /> : null}
       </Masonry>
     )
   }

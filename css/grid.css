@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.video {
+    padding: 10px;
+}
+
 .grid:before,
 .grid:after {
     content: "";
@@ -37,3 +41,12 @@
 .padder {
     visibility: hidden;
 }
+
+.content {
+    margin: 40px 145px 30px 145px;
+}
+
+.sticky .content {
+    margin-top: 80px;
+}
+

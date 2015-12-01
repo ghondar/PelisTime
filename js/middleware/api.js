@@ -21,10 +21,12 @@ export function fetchList(page) {
           from        : data.from,
           to          : data.to
         }
-        deferred.resolve({
-          data: data.data,
-          meta
-        })
+        setTimeout(() => {
+          deferred.resolve({
+            data: data.data,
+            meta
+          })
+        }, 3000)
       }
     })
   return deferred.promise

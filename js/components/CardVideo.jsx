@@ -25,17 +25,16 @@ export default class CardVideo extends Component{
     const { video } = this.props
 
     return (
-      <li className={Style.lista} onClick={::this._handleDetail}>
-        <Paper
-          zDepth={3}
-          className={Style.paper}>
-          <Card>
-            <CardMedia overlay={<CardTitle title={video.name}/>}>
-              <ImagePreloader src={video.cover_url} fallback={noImage}/>
-            </CardMedia>
-          </Card>
-        </Paper>
-      </li>
+      <Paper
+        zDepth={3}
+        className='paper'
+        onClick={::this._handleDetail}>
+        <Card>
+          <CardMedia overlay={<CardTitle title={video.name} />}>
+            <ImagePreloader src={video.cover_url} className='image' fallback={noImage}/>
+          </CardMedia>
+        </Card>
+      </Paper>
     )
   }
 

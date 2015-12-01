@@ -21,10 +21,7 @@ var config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    devFlagPlugin,
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    })
+    devFlagPlugin
   ],
   module : {
     loaders: [
@@ -41,7 +38,7 @@ var config = {
       },
       {
         test  : /\.css$/,
-        loader: ExtractTextPlugin.extract('css?module!cssnext-loader')
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test  : /\.png$/,
