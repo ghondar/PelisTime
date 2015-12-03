@@ -24,7 +24,7 @@ export default class Dashboard extends Component{
     const { dispatch } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
     return (
-      <main>
+      <main className='container'>
         <ListVideo
           videos={this.props.videoStore.data}
           currentPage={this.props.videoStore.meta.current_page}

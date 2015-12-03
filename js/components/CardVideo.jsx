@@ -23,6 +23,7 @@ export default class CardVideo extends Component{
 
   render() {
     const { video } = this.props
+    const name = video.name.length > 18 ? `${video.name.substr(0, 15)}...` : video.name
 
     return (
       <Paper
@@ -30,7 +31,14 @@ export default class CardVideo extends Component{
         className='paper'
         onClick={::this._handleDetail}>
         <Card>
-          <CardMedia overlay={<CardTitle title={video.name} />}>
+          <CardMedia
+            overlay={<CardTitle
+                        style={{ padding: 5 }}
+                        titleStyle={{
+                          fontSize : 20,
+                          textAlign: 'center'
+                        }}
+                        title={name} />}>
             <ImagePreloader src={video.cover_url} className='image' fallback={noImage}/>
           </CardMedia>
         </Card>

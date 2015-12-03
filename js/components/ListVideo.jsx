@@ -27,7 +27,8 @@ class ListVideo extends Component{
       end          : this.props.videos.length,
       paddingBottom: 0,
       paddingTop   : 0,
-      start        : 0
+      start        : 0,
+      mounted      : false
     }
   }
 
@@ -36,6 +37,9 @@ class ListVideo extends Component{
   }
 
   componentDidMount() {
+    this.setState({
+      mounted: true
+    })
     window.addEventListener('scroll', ::this.onScroll, false)
   }
 
@@ -63,7 +67,7 @@ class ListVideo extends Component{
     const { height, videos } = props
 
     const MARGIN_TOP = 20
-    const ROW_HEIGHT = 445
+    const ROW_HEIGHT = 262
     const ITEMS_PER_ROW = 5
     const scrollY = window.scrollY
     let paddingTop = 0
@@ -95,18 +99,19 @@ class ListVideo extends Component{
   }
 
   onScroll(e) {
-    const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props)
-
-    if (paddingTop !== this.state.paddingTop
-    || paddingBottom !== this.state.paddingBottom
-    || end !== this.state.end
-    || start !== this.state.start) {
-      this.setState({
-        end          : end,
-        paddingBottom: paddingBottom,
-        paddingTop   : paddingTop,
-        start        : start
-      })
+    if(this.state.mounted) {
+      const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props)
+      if (paddingTop !== this.state.paddingTop
+      || paddingBottom !== this.state.paddingBottom
+      || end !== this.state.end
+      || start !== this.state.start) {
+        this.setState({
+          end          : end,
+          paddingBottom: paddingBottom,
+          paddingTop   : paddingTop,
+          start        : start
+        })
+      }
     }
   }
 
@@ -135,7 +140,7 @@ class ListVideo extends Component{
     const { end, paddingBottom, paddingTop, start } = this.state
 
     return (
-      <Masonry
+      <div
         ref='masonry'
         elementType={'ul'}
         className='content'
@@ -144,7 +149,7 @@ class ListVideo extends Component{
           {this.renderVideos(start, end)}
         <div className='padder' style={{ height: paddingBottom }}></div>
         {this.props.videoStore.Loading ? <Spinner /> : null}
-      </Masonry>
+      </div>
     )
   }
 }
