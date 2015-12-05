@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import ImagePreloader from '../components/ImagePreloader.jsx'
+import ReactImageFallback from 'react-image-fallback'
 
 // Material Components
 import Card from 'material-ui/lib/card/card'
@@ -10,6 +10,7 @@ import CardTitle from 'material-ui/lib/card/card-title'
 // Assets
 import Style from '../../css/card-video.css'
 import noImage from '../../img/no-image.jpg'
+import loadingImage from '../../img/loading_spinner.gif'
 
 export default class CardVideo extends Component{
 
@@ -18,7 +19,8 @@ export default class CardVideo extends Component{
   }
 
   static propTypes = {
-    video: PropTypes.object.isRequired
+    video         : PropTypes.object.isRequired,
+    removeListener: PropTypes.func.isRequired
   }
 
   render() {
@@ -33,13 +35,18 @@ export default class CardVideo extends Component{
         <Card>
           <CardMedia
             overlay={<CardTitle
-                        style={{ padding: 5 }}
-                        titleStyle={{
-                          fontSize : 20,
-                          textAlign: 'center'
-                        }}
-                        title={name} />}>
-            <ImagePreloader src={video.cover_url} className='image' fallback={noImage}/>
+                      style={{ padding: 5 }}
+                      titleStyle={{
+                        fontSize : 20,
+                        textAlign: 'center'
+                      }}
+                      title={name} />}>
+            <ReactImageFallback
+              src={video.cover_url}
+              fallbackImage={noImage}
+              initialImage={loadingImage}
+              alt={video.name}
+              className='image' />
           </CardMedia>
         </Card>
       </Paper>
@@ -47,6 +54,7 @@ export default class CardVideo extends Component{
   }
 
   _handleDetail(e) {
-    this.props.history.push('/details')
+    this.props.removeListener()
+    this.props.history.push('details')
   }
 }

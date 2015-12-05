@@ -22,9 +22,11 @@ class ListVideo extends Component{
 
   constructor(props, context) {
     super(props, context)
+    this.getScrollState = this.getScrollState.bind(this)
+    this.onScroll = this.onScroll.bind(this)
 
     this.state = {
-      end          : this.props.videos.length,
+      end          : props.videos.length,
       paddingBottom: 0,
       paddingTop   : 0,
       start        : 0,
@@ -37,10 +39,10 @@ class ListVideo extends Component{
   }
 
   componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, false)
     this.setState({
       mounted: true
     })
-    window.addEventListener('scroll', ::this.onScroll, false)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,17 +52,26 @@ class ListVideo extends Component{
     || paddingBottom !== this.state.paddingBottom
     || start !== this.state.start
     || end !== this.state.end) {
-      this.setState({
-        end          : end,
-        paddingBottom: paddingBottom,
-        paddingTop   : paddingTop,
-        start        : start
-      })
+      if(this.state.mounted) {
+        this.setState({
+          end          : end,
+          paddingBottom: paddingBottom,
+          paddingTop   : paddingTop,
+          start        : start
+        })
+      }
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', ::this.onScroll, false)
+    this.setState({
+      mounted: false
+    })
+    this.removeListener()
+  }
+
+  removeListener() {
+    window.removeEventListener('scroll', this.onScroll, false)
   }
 
   getScrollState(props) {
@@ -98,13 +109,13 @@ class ListVideo extends Component{
     }
   }
 
-  onScroll(e) {
-    if(this.state.mounted) {
-      const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props)
-      if (paddingTop !== this.state.paddingTop
-      || paddingBottom !== this.state.paddingBottom
-      || end !== this.state.end
-      || start !== this.state.start) {
+  onScroll() {
+    const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props)
+    if (paddingTop !== this.state.paddingTop
+    || paddingBottom !== this.state.paddingBottom
+    || end !== this.state.end
+    || start !== this.state.start) {
+      if(this.state.mounted) {
         this.setState({
           end          : end,
           paddingBottom: paddingBottom,
@@ -122,9 +133,9 @@ class ListVideo extends Component{
 
     for (let i = start; i < end; i += chunk) {
       let videoList = videos.slice(i, i + chunk).map((video, j) => (
-          <div className='col-1-5 clearfix' key={video.id}>
+          <div className='col-1-5 clearfix' key={i + j + '-' + video.id}>
             <div className='video'>
-              <CardVideo video={video} history={this.props.history}/>
+              <CardVideo video={video} history={this.props.history} removeListener={::this.removeListener}/>
             </div>
           </div>
         )
@@ -140,7 +151,7 @@ class ListVideo extends Component{
     const { end, paddingBottom, paddingTop, start } = this.state
 
     return (
-      <div
+      <Masonry
         ref='masonry'
         elementType={'ul'}
         className='content'
@@ -149,7 +160,7 @@ class ListVideo extends Component{
           {this.renderVideos(start, end)}
         <div className='padder' style={{ height: paddingBottom }}></div>
         {this.props.videoStore.Loading ? <Spinner /> : null}
-      </div>
+      </Masonry>
     )
   }
 }
