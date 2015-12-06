@@ -19,8 +19,7 @@ export default class CardVideo extends Component{
   }
 
   static propTypes = {
-    video         : PropTypes.object.isRequired,
-    removeListener: PropTypes.func.isRequired
+    video: PropTypes.object.isRequired
   }
 
   render() {
@@ -54,7 +53,9 @@ export default class CardVideo extends Component{
   }
 
   _handleDetail(e) {
-    this.props.removeListener()
-    this.props.history.push('details')
+    const { video } = this.props
+    this.props.history.pushState({
+      id  : video.id
+    }, 'details')
   }
 }

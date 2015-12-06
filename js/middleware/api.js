@@ -29,3 +29,18 @@ export function fetchList(page) {
     })
   return deferred.promise
 }
+
+export function fetchDescription(id) {
+  var deferred = Q.defer()
+  request
+    .get(`${API_ROOT}/movies/${id}-undefined`)
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      if(err)
+        deferred.reject(new Error(err))
+      else {
+        deferred.resolve(res.body)
+      }
+    })
+  return deferred.promise
+}

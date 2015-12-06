@@ -1,36 +1,56 @@
-import { CARGAR_VIDEOS, CARGANDO_VIDEOS } from '../constants/ActionTypes'
-import { fetchList } from '../middleware/api'
+import { SET_VIDEOS, LOADING_VIDEOS, SET_DETAIL, LOADING_DETAIL } from '../constants/ActionTypes'
+import { fetchList, fetchDescription } from '../middleware/api'
 
 function setVideos(json) {
   return {
-    type: CARGAR_VIDEOS,
+    type: SET_VIDEOS,
     json
   }
 }
 
-export function setLoad(Loading) {
+function setDetail(json) {
   return {
-    type: CARGANDO_VIDEOS,
+    type: SET_DETAIL,
+    json
+  }
+}
+
+export function setLoad(type, Loading) {
+  return {
+    type,
     Loading
   }
 }
 
 export function fetchVideos(page) {
   return dispatch => {
-    dispatch(setLoad(true))
+    dispatch(setLoad(LOADING_VIDEOS, true))
     fetchList(page)
       .then(data => {
-        dispatch(setVideos({
-          ...data,
+        dispatch(setVideos(Object.assign({}, data, {
           Success: true
-        }))
-        dispatch(setLoad(false))
+        })))
+        dispatch(setLoad(LOADING_VIDEOS, false))
       })
       .catch(err => {
         dispatch(setVideos({
           Success: false,
           Loading: false
         }))
+      })
+  }
+}
+
+export function fetchDetail(id) {
+  return dispatch => {
+    dispatch(setLoad(LOADING_DETAIL, true))
+    fetchDescription(id)
+      .then(data => {
+        dispatch(setDetail(data))
+        dispatch(setLoad(LOADING_DETAIL, false))
+      })
+      .catch(err => {
+        dispatch(setDetail({ Loading: false }))
       })
   }
 }

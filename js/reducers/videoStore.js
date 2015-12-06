@@ -1,6 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes'
 
-let defaultState = {
+const defaultState = {
   meta    : {
     total       : 0,
     per_page    : 0,
@@ -14,14 +14,15 @@ let defaultState = {
   Success : false
 }
 
-export default function(state = defaultState, action) {
+export default function videoStore(state = defaultState, action) {
   switch (action.type) {
-    case ActionTypes.CARGAR_VIDEOS:
+    case ActionTypes.SET_VIDEOS:
       return Object.assign({}, state, {
-        meta: action.json.meta,
-        data: [ ...state.data, ...action.json.data ]
+        meta   : action.json.meta,
+        data   : [ ...state.data, ...action.json.data ],
+        Success: action.json.Success
       })
-    case ActionTypes.CARGANDO_VIDEOS:
+    case ActionTypes.LOADING_VIDEOS:
       return Object.assign({}, state, {
         Loading: action.Loading
       })
@@ -29,3 +30,4 @@ export default function(state = defaultState, action) {
       return state
   }
 }
+

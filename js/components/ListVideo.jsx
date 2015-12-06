@@ -18,6 +18,10 @@ import '../../css/videos.css'
 
 const Masonry = masonry(React)
 
+const masonryOptions = {
+  transitionDuration: 0
+}
+
 class ListVideo extends Component{
 
   constructor(props, context) {
@@ -67,10 +71,6 @@ class ListVideo extends Component{
     this.setState({
       mounted: false
     })
-    this.removeListener()
-  }
-
-  removeListener() {
     window.removeEventListener('scroll', this.onScroll, false)
   }
 
@@ -135,7 +135,7 @@ class ListVideo extends Component{
       let videoList = videos.slice(i, i + chunk).map((video, j) => (
           <div className='col-1-5 clearfix' key={i + j + '-' + video.id}>
             <div className='video'>
-              <CardVideo video={video} history={this.props.history} removeListener={::this.removeListener}/>
+              <CardVideo video={video} history={this.props.history}/>
             </div>
           </div>
         )
@@ -154,6 +154,7 @@ class ListVideo extends Component{
       <Masonry
         ref='masonry'
         elementType={'ul'}
+        options={masonryOptions}
         className='content'
         disableImagesLoaded={false}>
         <div className='padder' style={{ height: paddingTop }}></div>
