@@ -1,12 +1,17 @@
 import React, { PropTypes, Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import ReactImageFallback from 'react-image-fallback'
 import * as videoActions from '../actions/videoActions'
 
 // Custom Components
 import Spinner from '../components/Spinner.jsx'
 import DescriptionVideo from '../components/DescriptionVideo.jsx'
 import SourceList from '../components/SourceList.jsx'
+
+// Assets
+import noImage from '../../img/no-image.jpg'
+import loadingImage from '../../img/loading_spinner.gif'
 
 // Material Compoennts
 import RaisedButton from 'material-ui/lib/raised-button'
@@ -45,7 +50,13 @@ export default class DetailVideo extends Component{
     )
 
     return (
-      <div>
+      <div className='description'>
+        <ReactImageFallback
+              src={this.props.location.state.image}
+              fallbackImage={noImage}
+              initialImage={loadingImage}
+              className='cover-bg' />
+        <div className='cover-shadow'/>
         <RaisedButton
           label='Atras'
           secondary={true}

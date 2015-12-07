@@ -8,7 +8,6 @@ import CardMedia from 'material-ui/lib/card/card-media'
 import CardTitle from 'material-ui/lib/card/card-title'
 
 // Assets
-import Style from '../../css/card-video.css'
 import noImage from '../../img/no-image.jpg'
 import loadingImage from '../../img/loading_spinner.gif'
 
@@ -54,8 +53,13 @@ export default class CardVideo extends Component{
 
   _handleDetail(e) {
     const { video } = this.props
+    // this.props.history.pushState({
+    //   id   : video.id,
+    //   image: video.cover_url
+    // }, 'details')
     this.props.history.pushState({
-      id  : video.id
-    }, 'details')
+      source: 'http://archive.org/download/CartoonClassics/Krazy_Kat_-_Keeping_Up_With_Krazy.mp4'
+    }, 'player')
+
   }
 }

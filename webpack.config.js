@@ -1,29 +1,39 @@
+var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+var node_modules = fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin' })
 
 var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 })
 
 var config = {
-  entry  : [
+  entry    : [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './js/index.jsx'
   ],
-  output : {
+  output   : {
     path      : __dirname + '/static/',
     publicPath: 'http://localhost:3000/static/',
     filename  : 'bundle.js',
     hot       : true
   },
-  plugins: [
+  plugins  : [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     devFlagPlugin
   ],
-  module : {
+  externals: function(context, request, cb) {
+    if(node_modules.indexOf(request) !== -1 && request.indexOf('wcjs-player') !== -1) {
+      cb(null, 'commonjs ' + request)
+
+      return
+    }
+    cb()
+  },
+  module   : {
     loaders: [
       {
         test   :  /\.jsx$/,
@@ -51,11 +61,30 @@ var config = {
       {
         test  : /\.gif$/,
         loader: 'file-loader'
+      },
+      {
+        test  : /\.woff($|\?)/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test  : /\.ttf($|\?)/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test  : /\.eot($|\?)/,
+        loader: 'file-loader'
+      },
+      {
+        test  : /\.svg($|\?)/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
-  resolve: {
+  resolve  : {
     extensions: [ '', '.jsx', '.js', '.json' ]
+  },
+  node     : {
+    'wcjs-player': 'empty'
   }
 }
 

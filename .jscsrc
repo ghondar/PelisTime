@@ -37,15 +37,7 @@
   "disallowTrailingComma": true,
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
-  "maximumLineLength": {
-    "value": 100,
-    "tabSize": 1,
-    "allowComments": true,
-    "allowUrlComments": true,
-    "allowRegex": true
-  },
   "requireBlocksOnNewline": 1,
-  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
   "requireCapitalizedConstructors": true,
   "requireCommaBeforeLineBreak": true,
   "requireCurlyBraces": [
