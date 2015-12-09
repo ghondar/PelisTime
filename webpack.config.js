@@ -82,9 +82,6 @@ var config = {
   },
   resolve  : {
     extensions: [ '', '.jsx', '.js', '.json' ]
-  },
-  node     : {
-    'wcjs-player': 'empty'
   }
 }
 

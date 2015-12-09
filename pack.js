@@ -10,7 +10,9 @@ var paths = {
 }
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
-var nodeModuleIgnores = [ 'node_modules', 'js', 'css', 'dist', 'docs' ]
+var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
+
+var nodeModuleIgnores = [ 'js', 'css', 'dist', 'docs', 'fonts', 'img' ].concat(arrayModules)
 
 compiler.init(paths.cache)
 compiler.compileAll('static')
@@ -27,7 +29,7 @@ packager({
   version  : require('electron-prebuilt/package.json').version,
   overwrite: true,
   prune    : true,
-  ignore   : new RegExp(`\/(${nodeModuleIgnores.join('|')})`),
+  ignore   : new RegExp(`^/(?!node_modules/wcjs-player)(${nodeModuleIgnores.join('|')})$`),
   // asar: true,
   out      : 'dist'
 }, function(err, appPath) {

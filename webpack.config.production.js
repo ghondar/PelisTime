@@ -1,20 +1,30 @@
 var path = require('path')
+var fs = require('fs')
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var strip = require('strip-loader')
 var CleanPlugin = require('clean-webpack-plugin')
 var relativeAssetsPath = './static'
 var assetsPath = path.join(__dirname, relativeAssetsPath)
+var node_modules = fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin' })
+
 
 module.exports = {
-  devtool : 'source-map',
-  entry   : [ './js/index.jsx' ],
-  output  : {
+  devtool  : 'source-map',
+  entry    : [ './js/index.jsx' ],
+  output   : {
     path      : assetsPath,
     filename  : 'bundle.js',
     publicPath: 'static/'
   },
-  module  : {
+  externals: function(context, request, cb) {
+    if(node_modules.indexOf(request) !== -1 && request.indexOf('wcjs-player') !== -1) {
+      cb(null, 'commonjs ' + request)
+
+      return
+    }
+    cb()
+  },
+  module   : {
     loaders: [
       {
         test   :  /\.jsx$/,
@@ -29,7 +39,7 @@ module.exports = {
       },
       {
         test  : /\.css$/,
-        loader: ExtractTextPlugin.extract('css?module!cssnext-loader')
+        loader: 'style-loader!css-loader!cssnext-loader'
       },
       {
         test  : /\.png$/,
@@ -61,17 +71,16 @@ module.exports = {
       }
     ]
   },
-  progress: true,
-  resolve : {
+  progress : true,
+  resolve  : {
     modulesDirectories: [
       'js',
       'node_modules'
     ],
     extensions        : [ '', '.json', '.js', 'jsx' ]
   },
-  plugins : [
+  plugins  : [
     new CleanPlugin([ relativeAssetsPath ]),
-    new ExtractTextPlugin('app.css', { allChunks: true }),
     new webpack.DefinePlugin({
       __CLIENT__     : true,
       __SERVER__     : false,

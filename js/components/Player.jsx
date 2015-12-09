@@ -2,7 +2,8 @@ import React, { PropTypes, Component } from 'react'
 import Wjs from 'wcjs-player'
 
 // Material Components
-import RaisedButton from 'material-ui/lib/raised-button'
+import FloatingActionButton from 'material-ui/lib/floating-action-button'
+import ArrowBack from 'material-ui/lib/svg-icons/navigation/arrow-back'
 
 export default class Player extends Component{
 
@@ -17,6 +18,15 @@ export default class Player extends Component{
   componentDidMount() {
     this.player = new Wjs('#player').addPlayer({ autoplay: true })
     this.player.addPlaylist(this.props.location.state.source)
+  }
+
+  componentWillUnmount() {
+    const timeout = this.state.timeout
+
+    if(timeout)
+      clearTimeout(timeout)
+
+    this.player.stop()
   }
 
   hideButton() {
@@ -59,17 +69,24 @@ export default class Player extends Component{
         onMouseEnter={::this._handlleMouse}
         onMouseMove={::this._handlleMouse}
         className='player-container'>
-        <RaisedButton
-          label='Atras'
+        <FloatingActionButton
           secondary={true}
           style={Style.button}
+          backgroundColor='rgba(0, 200, 230, 0.5)'
           className='player-button'
-          />
+          iconStyle={{ zIndex: 4 }}
+          onTouchTap={::this._handleBack}>
+          <ArrowBack />
+        </FloatingActionButton>
         <div
           id='player'
           className='player'></div>
       </div>
     )
+  }
+
+  _handleBack() {
+    this.props.history.goBack()
   }
 
   _handlleMouse() {
