@@ -5,8 +5,6 @@
 
 .paper {
   cursor: pointer;
-  min-width: 180px;
-  min-height: 256px;
   padding: 1px;
 }
 

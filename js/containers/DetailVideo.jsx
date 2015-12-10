@@ -8,13 +8,14 @@ import * as videoActions from '../actions/videoActions'
 import Spinner from '../components/Spinner.jsx'
 import DescriptionVideo from '../components/DescriptionVideo.jsx'
 import SourceList from '../components/SourceList.jsx'
+import Back from '../components/Back.jsx'
 
 // Assets
 import noImage from '../../img/no-image.jpg'
 import loadingImage from '../../img/loading_spinner.gif'
 
 // Material Compoennts
-import RaisedButton from 'material-ui/lib/raised-button'
+import { RaisedButton } from 'material-ui'
 
 @connect(state => ({
   detailStore: state.detailStore
@@ -45,7 +46,10 @@ export default class DetailVideo extends Component{
           year={year}
           genre={genre.name}
         />
-        <SourceList sources={sources} />
+        <SourceList
+          name={name}
+          sources={sources}
+          history={this.props.history} />
       </div>
     )
 
@@ -57,10 +61,9 @@ export default class DetailVideo extends Component{
               initialImage={loadingImage}
               className='cover-bg' />
         <div className='cover-shadow'/>
-        <RaisedButton
-          label='Atras'
-          secondary={true}
-          onTouchTap={::this._handleBack}/>
+        <Back
+          history={this.props.history}
+          contentClassName='margin'/>
         {childComponents}
       </div>
     )

@@ -26,7 +26,7 @@ var config = {
     devFlagPlugin
   ],
   externals: function(context, request, cb) {
-    if(node_modules.indexOf(request) !== -1 && request.indexOf('wcjs-player') !== -1) {
+    if(node_modules.indexOf(request) !== -1) {
       cb(null, 'commonjs ' + request)
 
       return

@@ -78,6 +78,7 @@
 body {
   font-family: 'Oswald', Roboto, Arial, sans-serif;
   font-weight: 300;
+  overflow-x: hidden;
 }
 
 .container {

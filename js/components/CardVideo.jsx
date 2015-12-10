@@ -53,13 +53,9 @@ export default class CardVideo extends Component{
 
   _handleDetail(e) {
     const { video } = this.props
-    // this.props.history.pushState({
-    //   id   : video.id,
-    //   image: video.cover_url
-    // }, 'details')
     this.props.history.pushState({
-      source: 'http://archive.org/download/CartoonClassics/Krazy_Kat_-_Keeping_Up_With_Krazy.mp4'
-    }, 'player')
-
+      id   : video.id,
+      image: video.cover_url
+    }, 'details')
   }
 }
