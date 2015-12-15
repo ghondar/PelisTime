@@ -37,7 +37,7 @@ export default class DescriptionVideo extends Component{
         <span> {genre},</span>
         <span> {duration} minutos,</span>
         <span> {year},</span>
-        <span> {rating}</span>
+        <span> {rating}/10</span>
       </div>
     )
   }

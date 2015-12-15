@@ -8,6 +8,8 @@ var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 })
 
+var ignoreModules = [ 'wcjs-player' ]
+
 var config = {
   entry    : [
     'webpack-dev-server/client?http://localhost:3000',
