@@ -20,8 +20,9 @@ var pathWebchimera = {
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
 var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
+var accetedModules = 'wcjs-player|peerflix|read-torrent'
 
-var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img' ]
+var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img' ].concat(arrayModules)
 
 compiler.init(paths.cache)
 compiler.compileAll('static')
@@ -33,12 +34,12 @@ fs.writeFileSync(
 packager({
   dir      : '.',
   name     : packageJson.name,
-  platform : 'win32',
+  platform : 'darwin',
   arch     : 'x64',
   version  : require('electron-prebuilt/package.json').version,
   overwrite: true,
   prune    : true,
-  ignore   : new RegExp(`^/(${nodeModuleIgnores.join('|')})$`),
+  ignore   : new RegExp(`^/(?!node_modules/(${accetedModules}))(${nodeModuleIgnores.join('|')})$`),
   // asar: true,
   out      : 'dist'
 }, function(err, appPath) {
@@ -47,6 +48,9 @@ packager({
     if(dir.indexOf('darwin') !== -1) {
       fse.remove(`${dir}${pathWebchimera[ 'darwin' ]}webchimera.js/`, function(err) {
         var unzipDarwin  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${pathWebchimera[ 'darwin' ]}` ])
+        unzipDarwin.stdout.on('data', function(output) {
+          console.log('data: ', output.toString('utf8'))
+        })
         unzipDarwin.stderr.on('data', function(err) {
           console.log('Error: ', err.toString('utf8'))
         })

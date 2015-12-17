@@ -7,6 +7,7 @@ var relativeAssetsPath = './static'
 var assetsPath = path.join(__dirname, relativeAssetsPath)
 var node_modules = fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin' })
 
+var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent' ]
 
 module.exports = {
   devtool  : 'source-map',
@@ -18,9 +19,14 @@ module.exports = {
   },
   externals: function(context, request, cb) {
     if(node_modules.indexOf(request) !== -1) {
-      cb(null, 'commonjs ' + request)
+      var modules = ignoreModules.filter(function(ignoreModule) {
+        return request.indexOf(ignoreModule) !== -1
+      })
+      if(modules.length > 0) {
+        cb(null, 'commonjs ' + request)
 
-      return
+        return
+      }
     }
     cb()
   },

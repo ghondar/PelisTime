@@ -8,7 +8,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 })
 
-var ignoreModules = [ 'wcjs-player' ]
+var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent' ]
 
 var config = {
   entry    : [
@@ -29,9 +29,14 @@ var config = {
   ],
   externals: function(context, request, cb) {
     if(node_modules.indexOf(request) !== -1) {
-      cb(null, 'commonjs ' + request)
+      var modules = ignoreModules.filter(function(ignoreModule) {
+        return request.indexOf(ignoreModule) !== -1
+      })
+      if(modules.length > 0) {
+        cb(null, 'commonjs ' + request)
 
-      return
+        return
+      }
     }
     cb()
   },
