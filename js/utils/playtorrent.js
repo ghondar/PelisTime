@@ -153,7 +153,3 @@ export function readTorrent(url) {
 
   return defer.promise
 }
-
-// readTorrent('http://torrents.bityouth.com/downloads/1/3/2/9/6/Matar_al_mensajero_HDRip.torrent')
-//   .then(playTorrent)
-//   .then(href => {console.log(href)}, err => {console.log(err)}, info => {console.log(info)})

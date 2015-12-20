@@ -14,9 +14,6 @@ import Back from '../components/Back.jsx'
 import noImage from '../../img/no-image.jpg'
 import loadingImage from '../../img/loading_spinner.gif'
 
-// Material Compoennts
-import { RaisedButton } from 'material-ui'
-
 @connect(state => ({
   detailStore: state.detailStore
 }))
@@ -29,14 +26,17 @@ export default class DetailVideo extends Component{
   componentWillMount() {
     const { dispatch, detailStore, location } = this.props
     const { id } = location.state
-    dispatch(videoActions.fetchDetail(id))
+
+    if(!detailStore[ id ])
+      dispatch(videoActions.fetchDetail(id))
   }
 
   render() {
-    const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore
+    const { id } = this.props.location.state
+    const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore[ id ] || { Loading : true }
 
     const childComponents = Loading ? <Spinner /> : (
-      <div>
+      <div style={{ margin: 20 }}>
         <DescriptionVideo
           name={name}
           plot={plot}
@@ -44,7 +44,7 @@ export default class DetailVideo extends Component{
           rating={rating}
           type={type}
           year={year}
-          genre={genre.name}
+          genre={genre ? genre.name : ''}
         />
         <SourceList
           name={name}

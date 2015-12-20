@@ -13,9 +13,13 @@ var paths = {
 }
 
 var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
-var pathWebchimera = {
-  darwin: `/PelisTime.app/Contents/Resources/app/${pathModule}`,
-  win32 : `/resources/app/${pathModule}`
+var webchimera = {
+  darwin: {
+    path: `/PelisTime.app/Contents/Resources/app/${pathModule}`
+  },
+  win32 : {
+    path: `/resources/app/${pathModule}`
+  }
 }
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
@@ -34,7 +38,7 @@ fs.writeFileSync(
 packager({
   dir      : '.',
   name     : packageJson.name,
-  platform : 'darwin',
+  platform : arch,
   arch     : 'x64',
   version  : require('electron-prebuilt/package.json').version,
   overwrite: true,
@@ -45,32 +49,17 @@ packager({
 }, function(err, appPath) {
   if (err) return console.error(err)
   appPath.forEach(function(dir) {
-    if(dir.indexOf('darwin') !== -1) {
-      fse.remove(`${dir}${pathWebchimera[ 'darwin' ]}webchimera.js/`, function(err) {
-        var unzipDarwin  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${pathWebchimera[ 'darwin' ]}` ])
-        unzipDarwin.stdout.on('data', function(output) {
-          console.log('data: ', output.toString('utf8'))
-        })
-        unzipDarwin.stderr.on('data', function(err) {
-          console.log('Error: ', err.toString('utf8'))
-        })
-        unzipDarwin.on('exit', function(code) {
-          console.log('Package osx finished.')
-        })
+    fse.remove(`${dir}${webchimera[ arch ].path}webchimera.js/`, function(err) {
+      var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ arch ].path}` ])
+      unzip.stdout.on('data', function(output) {
+        console.log('data: ', output.toString('utf8'))
       })
-    }else if(dir.indexOf('win32') !== -1) {
-      fse.remove(`${dir}${pathWebchimera[ 'win32' ]}webchimera.js/`, function(err) {
-        var unzipWin  = spawn('unzip', [ './binVideo/win-64bits.zip', '-d', `./${dir}${pathWebchimera[ 'win32' ]}` ])
-        unzipWin.stdout.on('data', function(output) {
-          console.log('data: ', output.toString('utf8'))
-        })
-        unzipWin.stderr.on('data', function(err) {
-          console.log('Error: ', err.toString('utf8'))
-        })
-        unzipWin.on('exit', function(code) {
-          console.log('Package win finished.')
-        })
+      unzip.stderr.on('data', function(err) {
+        console.log('Error: ', err.toString('utf8'))
       })
-    }
+      unzip.on('exit', function(code) {
+        console.log('Package osx finished.')
+      })
+    })
   })
 })

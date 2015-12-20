@@ -43,14 +43,29 @@ export function fetchVideos(page) {
 
 export function fetchDetail(id) {
   return dispatch => {
-    dispatch(setLoad(LOADING_DETAIL, true))
+    dispatch(setLoad(LOADING_DETAIL, {
+      data: true,
+      id
+    }))
     fetchDescription(id)
       .then(data => {
-        dispatch(setDetail(data))
-        dispatch(setLoad(LOADING_DETAIL, false))
+        dispatch(setDetail({
+          data: Object.assign({}, data, { Success: true }),
+          id
+        }))
+        dispatch(setLoad(LOADING_DETAIL, {
+          data: false,
+          id
+        }))
       })
       .catch(err => {
-        dispatch(setDetail({ Loading: false }))
+        dispatch(setDetail({
+          data: {
+            Success: false,
+            Loading: false
+          },
+          id
+        }))
       })
   }
 }

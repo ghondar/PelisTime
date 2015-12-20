@@ -8,6 +8,7 @@ import TableHeader from 'material-ui/lib/table/table-header'
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column'
 import TableRow from 'material-ui/lib/table/table-row'
 import TableRowColumn from 'material-ui/lib/table/table-row-column'
+import LinearProgress from 'material-ui/lib/linear-progress'
 import { Dialog, FlatButton } from 'material-ui'
 
 export default class SourceList extends Component{
@@ -18,7 +19,7 @@ export default class SourceList extends Component{
       progressTorrent: {
         percent: 0.00,
         started: false,
-        speed  : '0kb',
+        speed  : '0.0',
         active : 0,
         peers  : 0,
         timeout: false
@@ -45,25 +46,37 @@ export default class SourceList extends Component{
         secondary={true}
         onTouchTap={::this._onDialogCancel} />
     ]
-    const body = this.props.sources.map(source => (
+    const body = this.props.sources.map(source => {
+      let name = /([^\/]+(torrent)$|$)/.exec(source.nombre)[ 0 ].split('.torrent')[ 0 ]
+
+      return (
       <TableRow key={source.nombre}>
+        <TableRowColumn>{name}</TableRowColumn>
         <TableRowColumn>{source.def}p</TableRowColumn>
         <TableRowColumn>{source.peso}</TableRowColumn>
         <TableRowColumn>{source.fecha}</TableRowColumn>
       </TableRow>
-    ))
-    let percent = `${this.state.progressTorrent.percent.toFixed(2).toString()}%`
+    )
+    })
+    const { percent, speed, peers } = this.state.progressTorrent
+    let percentParsed = `${percent.toFixed(2)}%`
+
+    const progress = (
+      <LinearProgress style={{ marginBottom: 20 }} mode='determinate' value={percent} />
+    )
 
     return (
-      <div>
+      <div className='container-source-list'>
         <Dialog
           ref='dialog'
+          contentClassName='dialog-source-list'
+          contentStyle={{ width: 300 }}
           title='Creando Buffer...'
-          contentClassName='dialog'
           autoDetectWindowHeight={true}
           actions={standardActions}
           open={this.state.open}>
-          {percent}
+          {progress}
+          {parseInt(speed) ? speed : '0KB'}/s
         </Dialog>
         <Table
           height='300px'
@@ -78,6 +91,7 @@ export default class SourceList extends Component{
             selectAllSelected={false}
             enableSelectAll={false}>
             <TableRow>
+              <TableHeaderColumn tooltip='Nombre'>Nombre</TableHeaderColumn>
               <TableHeaderColumn tooltip='Calidad de Video'>Formato</TableHeaderColumn>
               <TableHeaderColumn tooltip='Peso'>Peso</TableHeaderColumn>
               <TableHeaderColumn tooltip='Fecha de Subida'>Subido</TableHeaderColumn>
@@ -109,7 +123,7 @@ export default class SourceList extends Component{
           title : this.props.name
         }, 'player')
       }, err => {
-        console.log(err)
+        this._onDialogCancel.call(this)
       }, info => {
         this.setState({
           progressTorrent: info
