@@ -15,10 +15,12 @@ var paths = {
 var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
 var webchimera = {
   darwin: {
-    path: `/PelisTime.app/Contents/Resources/app/${pathModule}`
+    path: `/PelisTime.app/Contents/Resources/app/${pathModule}`,
+    ico : 'img/windows.ico'
   },
   win32 : {
-    path: `/resources/app/${pathModule}`
+    path: `/resources/app/${pathModule}`,
+    ico : 'img/osx.icns'
   }
 }
 
@@ -39,8 +41,16 @@ packager({
   dir      : '.',
   name     : packageJson.name,
   platform : arch,
+  icon     : webchimera[ arch ].ico,
   arch     : 'x64',
   version  : require('electron-prebuilt/package.json').version,
+  "build-version": packageJson.version,
+  "version-string": {
+    CompanyName: 'PelisTime inc.',
+    InternalName: packageJson.name,
+    ProductName: packageJson.name,
+    ProductVersion: require('electron-prebuilt/package.json').version
+  },
   overwrite: true,
   prune    : true,
   ignore   : new RegExp(`^/(?!node_modules/(${accetedModules}))(${nodeModuleIgnores.join('|')})$`),
@@ -50,16 +60,22 @@ packager({
   if (err) return console.error(err)
   appPath.forEach(function(dir) {
     fse.remove(`${dir}${webchimera[ arch ].path}webchimera.js/`, function(err) {
-      var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ arch ].path}` ])
-      unzip.stdout.on('data', function(output) {
-        console.log('data: ', output.toString('utf8'))
-      })
-      unzip.stderr.on('data', function(err) {
-        console.log('Error: ', err.toString('utf8'))
-      })
-      unzip.on('exit', function(code) {
-        console.log('Package osx finished.')
-      })
+      if(dir.indexOf('darwin') !== -1) {
+        var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ arch ].path}` ])
+        unzip.stdout.on('data', function(output) {
+          console.log('data: ', output.toString('utf8'))
+        })
+        unzip.stderr.on('data', function(err) {
+          console.log('Error: ', err.toString('utf8'))
+        })
+        unzip.on('exit', function(code) {
+          console.log('Package osx finished.')
+        })
+      }else if(dir.indexOf('win32') !== -1) {
+        var unzip = require('unzip')
+        fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ arch ].path}` }))
+      }
     })
   })
 })
+
