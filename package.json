@@ -10,7 +10,8 @@
     "start-dev": "NODE_ENV=development DEBUG=true electron .",
     "pack": "node pack.js",
     "build": "webpack --config webpack.config.production.js",
-    "installer:win": "electron-builder dist/PelisTime-win32-x64 --platform=win --config=config.json --out=dist/"
+    "installer:win": "electron-builder dist/PelisTime-win32-x64 --platform=win --out=dist/ --config=config.json",
+    "installer:osx": "electron-builder dist/PelisTime-darwin-x64/PelisTime.app --platform=osx  --out=dist/ --config=config.json"
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",

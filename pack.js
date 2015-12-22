@@ -16,11 +16,11 @@ var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modul
 var webchimera = {
   darwin: {
     path: `/PelisTime.app/Contents/Resources/app/${pathModule}`,
-    ico : 'img/windows.ico'
+    ico : 'img/osx.icns'
   },
   win32 : {
     path: `/resources/app/${pathModule}`,
-    ico : 'img/osx.icns'
+    ico : 'img/windows.ico'
   }
 }
 
@@ -38,24 +38,24 @@ fs.writeFileSync(
 )
 
 packager({
-  dir      : '.',
-  name     : packageJson.name,
-  platform : arch,
-  icon     : webchimera[ arch ].ico,
-  arch     : 'x64',
-  version  : require('electron-prebuilt/package.json').version,
-  "build-version": packageJson.version,
-  "version-string": {
-    CompanyName: 'PelisTime inc.',
-    InternalName: packageJson.name,
-    ProductName: packageJson.name,
+  dir             : '.',
+  name            : packageJson.name,
+  platform        : arch,
+  icon            : webchimera[ arch ].ico,
+  arch            : 'x64',
+  version         : require('electron-prebuilt/package.json').version,
+  'build-version' : packageJson.version,
+  'version-string': {
+    CompanyName   : 'PelisTime inc.',
+    InternalName  : packageJson.name,
+    ProductName   : 'Pelis Time ',
     ProductVersion: require('electron-prebuilt/package.json').version
   },
-  overwrite: true,
-  prune    : true,
-  ignore   : new RegExp(`^/(?!node_modules/(${accetedModules}))(${nodeModuleIgnores.join('|')})$`),
+  overwrite       : true,
+  prune           : true,
+  ignore          : new RegExp(`^/(?!node_modules/(${accetedModules}))(${nodeModuleIgnores.join('|')})$`),
   // asar: true,
-  out      : 'dist'
+  out             : 'dist'
 }, function(err, appPath) {
   if (err) return console.error(err)
   appPath.forEach(function(dir) {
