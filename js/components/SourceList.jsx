@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { playTorrent, readTorrent } from '../utils/playtorrent'
 
+// Custom Components
+import HealthTorrent from '../components/HealthTorrent.jsx'
+
 // Material Compoennts
 import Table from 'material-ui/lib/table/table'
 import TableBody from 'material-ui/lib/table/table-body'
@@ -55,6 +58,7 @@ export default class SourceList extends Component{
         <TableRowColumn>{source.def}p</TableRowColumn>
         <TableRowColumn>{source.peso}</TableRowColumn>
         <TableRowColumn>{source.fecha}</TableRowColumn>
+        <TableRowColumn><HealthTorrent url={source.url} /></TableRowColumn>
       </TableRow>
     )
     })
@@ -95,6 +99,7 @@ export default class SourceList extends Component{
               <TableHeaderColumn tooltip='Calidad de Video'>Formato</TableHeaderColumn>
               <TableHeaderColumn tooltip='Peso'>Peso</TableHeaderColumn>
               <TableHeaderColumn tooltip='Fecha de Subida'>Subido</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Estado del Torrent'>Estado</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody

@@ -7,7 +7,7 @@ var relativeAssetsPath = './static'
 var assetsPath = path.join(__dirname, relativeAssetsPath)
 var node_modules = fs.readdirSync('node_modules').filter(function(x) { return x !== '.bin' })
 
-var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent' ]
+var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent', 'torrent-health' ]
 
 module.exports = {
   devtool  : 'source-map',
