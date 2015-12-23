@@ -1,36 +1,27 @@
 import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as videoActions from '../actions/videoActions'
 
 // Custom Components
-import ListVideo from '../components/ListVideo.jsx'
+import ListVideoContainer from './ListVideoContainer.jsx'
 
-@connect(state => state)
+// Material Compoennts
+// import AppBar from 'material-ui/lib/app-bar'
+
 export default class Dashboard extends Component{
 
   constructor(props, context) {
     super(props, context)
   }
 
-  componentWillMount() {
-    const { dispatch } = this.props
-    const actions = bindActionCreators(videoActions, dispatch)
-    if(!this.props.videoStore.meta.current_page)
-      actions.fetchVideos(1)
-  }
-
   render() {
-    const { dispatch } = this.props
-    const actions = bindActionCreators(videoActions, dispatch)
     return (
       <main className='container'>
-        <ListVideo
-          videos={this.props.videoStore.data}
-          currentPage={this.props.videoStore.meta.current_page}
-          loading={this.props.videoStore.Loading}
-          {...actions}
-          {...this.props}/>
+        {/*<AppBar
+          title='Title'
+          iconClassNameRight='muidocs-icon-navigation-expand-more'
+          style={{
+            position: 'fixed',
+            top     : 0 }} />*/}
+        {this.props.children}
       </main>
     )
   }

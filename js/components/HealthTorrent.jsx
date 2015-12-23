@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import Q from 'q'
 import torrentHealth from 'torrent-health'
 
 // Material Components
@@ -20,13 +21,36 @@ export default class HealthTorrent extends Component{
   }
 
   componentDidMount() {
-    torrentHealth(this.props.url)
+    this.cancelablePromise = this.makeCancelable(torrentHealth(this.props.url))
+    this.cancelablePromise
+      .promise
       .then(health => {
         this.setState(Object.assign({}, { loading: false }, health))
       })
       .catch(err => {
-        this.setState({ loading: false })
+        if(!err.isCanceled) this.setState({ loading: false })
       })
+  }
+
+  makeCancelable(promise) {
+    let hasCanceled_ = false
+
+    return {
+      promise: new Promise(
+        (resolve, reject) => promise
+          .then(r => hasCanceled_ ?
+            reject({ isCanceled: true })
+            : resolve(r)
+          )
+      ),
+      cancel() {
+        hasCanceled_ = true
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.cancelablePromise.cancel()
   }
 
   render() {
