@@ -26,7 +26,7 @@ var webchimera = {
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
 var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
-var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health'
+var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health|q'
 
 var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img' ].concat(arrayModules)
 
@@ -48,7 +48,7 @@ packager({
   'version-string': {
     CompanyName   : 'PelisTime inc.',
     InternalName  : packageJson.name,
-    ProductName   : 'Pelis Time ',
+    ProductName   : packageJson.name,
     ProductVersion: require('electron-prebuilt/package.json').version
   },
   overwrite       : true,

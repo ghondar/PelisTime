@@ -58,7 +58,6 @@
     "babel-core": "^5.8.23",
     "babel-loader": "^5.3.2",
     "bower-webpack-plugin": "^0.1.8",
-    "buckle": "0.0.3",
     "clean-webpack-plugin": "^0.1.4",
     "css-loader": "^0.17.0",
     "cssnext-loader": "^1.0.1",

@@ -1,6 +1,6 @@
 {
   "osx" : {
-    "title": "Pelis Time",
+    "title": "PelisTime",
     "background": "img/background.png",
     "icon": "img/osx.icns",
     "icon-size": 80,
@@ -10,7 +10,7 @@
     ]
   },
   "win" : {
-    "title" : "Pelis Time",
+    "title" : "PelisTime",
     "version" : "0.1.0",
     "icon" : "img/windows.ico",
     "verbosity": 1
