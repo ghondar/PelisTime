@@ -11,23 +11,26 @@ var devFlagPlugin = new webpack.DefinePlugin({
 var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent', 'torrent-health', 'q' ]
 
 var config = {
-  entry    : [
+  entry        : [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './js/index.jsx'
   ],
-  output   : {
+  output       : {
     path      : __dirname + '/static/',
     publicPath: 'http://localhost:3000/static/',
     filename  : 'bundle.js',
     hot       : true
   },
-  plugins  : [
+  resolveLoader: {
+    fallback: path.join(__dirname, 'node_modules')
+  },
+  plugins      : [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     devFlagPlugin
   ],
-  externals: function(context, request, cb) {
+  externals    : function(context, request, cb) {
     if(node_modules.indexOf(request) !== -1) {
       var modules = ignoreModules.filter(function(ignoreModule) {
         return request.indexOf(ignoreModule) !== -1
@@ -40,7 +43,7 @@ var config = {
     }
     cb()
   },
-  module   : {
+  module       : {
     loaders: [
       {
         test   :  /\.jsx$/,
@@ -50,8 +53,13 @@ var config = {
       {
         test   : /\.js$/,
         loaders: [ 'babel' ],
-        include: path.join(__dirname, 'js'),
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      {
+        test   : /\.js$/,
+        loaders: [ 'react-hot', 'babel' ],
+        include: path.join(__dirname, 'node_modules', 'redux-devtools', 'src')
       },
       {
         test  : /\.css$/,
@@ -87,7 +95,12 @@ var config = {
       }
     ]
   },
-  resolve  : {
+  resolve      : {
+    alias     : {
+      'redux-devtools/lib': path.join(__dirname, 'node_modules', 'redux-devtools', 'src'),
+      'redux-devtools'    : path.join(__dirname, 'node_modules', 'redux-devtools', 'src'),
+      react               : path.join(__dirname, 'node_modules', 'react')
+    },
     extensions: [ '', '.jsx', '.js', '.json' ]
   }
 }

@@ -7,7 +7,7 @@ let createStoreWithMiddleware
 // Configure the dev tools when in DEV mode
 if (__DEV__) {
   let { persistState } = require('redux-devtools')
-  let DevTools = require('../containers/DevTools')()
+  let DevTools = require('../containers/DevTools')
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
     DevTools.instrument(),
@@ -20,5 +20,13 @@ if (__DEV__) {
 const rootReducer = combineReducers(reducers)
 
 export default function configureStore(initialState) {
-  return createStoreWithMiddleware(rootReducer, initialState)
+  const store = createStoreWithMiddleware(rootReducer, initialState)
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers').default)
+    )
+  }
+
+  return store
 }

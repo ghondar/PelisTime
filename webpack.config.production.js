@@ -10,14 +10,17 @@ var node_modules = fs.readdirSync('node_modules').filter(function(x) { return x 
 var ignoreModules = [ 'wcjs-player', 'peerflix', 'read-torrent', 'torrent-health', 'q' ]
 
 module.exports = {
-  devtool  : 'source-map',
-  entry    : [ './js/index.jsx' ],
-  output   : {
+  devtool      : 'source-map',
+  entry        : [ './js/index.jsx' ],
+  output       : {
     path      : assetsPath,
     filename  : 'bundle.js',
     publicPath: 'static/'
   },
-  externals: function(context, request, cb) {
+  resolveLoader: {
+    fallback: path.join(__dirname, 'node_modules')
+  },
+  externals    : function(context, request, cb) {
     if(node_modules.indexOf(request) !== -1) {
       var modules = ignoreModules.filter(function(ignoreModule) {
         return request.indexOf(ignoreModule) !== -1
@@ -30,7 +33,7 @@ module.exports = {
     }
     cb()
   },
-  module   : {
+  module       : {
     loaders: [
       {
         test   :  /\.jsx$/,
@@ -40,8 +43,13 @@ module.exports = {
       {
         test   : /\.js$/,
         loaders: [ 'babel' ],
-        include: path.join(__dirname, 'js'),
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      {
+        test   : /\.js$/,
+        loaders: [ 'react-hot', 'babel' ],
+        include: path.join(__dirname, 'node_modules', 'redux-devtools', 'src')
       },
       {
         test  : /\.css$/,
@@ -77,15 +85,15 @@ module.exports = {
       }
     ]
   },
-  progress : true,
-  resolve  : {
+  progress     : true,
+  resolve      : {
     modulesDirectories: [
       'js',
       'node_modules'
     ],
     extensions        : [ '', '.json', '.js', 'jsx' ]
   },
-  plugins  : [
+  plugins      : [
     new CleanPlugin([ relativeAssetsPath ]),
     new webpack.DefinePlugin({
       __CLIENT__     : true,
