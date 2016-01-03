@@ -14,21 +14,36 @@ export default class ListVideoContainer extends Component{
   }
 
   componentWillMount() {
-    const { dispatch } = this.props
+    const { dispatch, viewStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    if(!this.props.videoStore.meta.current_page)
-      actions.fetchVideos(1)
+    actions.fetchVideos(viewStore.view, 1)
   }
 
   render() {
-    const { dispatch } = this.props
+    const { dispatch, videoStore, viewStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
+    const stateVideos = videoStore[ viewStore.view ]
+    let data = {}
+
+    if(stateVideos) {
+      data = {
+        videos     : stateVideos.data,
+        currentPage: stateVideos.meta.current_page,
+        lastPage   : stateVideos.meta.last_page,
+        loading    : stateVideos.Loading
+      }
+    }else {
+      data = {
+        videos     : [],
+        currentPage: 1,
+        lastPage   : 2,
+        loading    : true
+      }
+    }
 
     return (
       <ListVideo
-          videos={this.props.videoStore.data}
-          currentPage={this.props.videoStore.meta.current_page}
-          loading={this.props.videoStore.Loading}
+          {...data}
           {...actions}
           {...this.props}/>
     )

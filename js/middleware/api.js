@@ -3,10 +3,10 @@ import request from 'superagent'
 
 const API_ROOT = 'http://api-ghondar.jit.su'
 
-export function fetchList(page) {
+export function fetchList(view, page) {
   var deferred = Q.defer()
   request
-    .get(`${API_ROOT}/movies/releases/?page=${page}`)
+    .get(`${API_ROOT}/movies/${view}?page=${page}`)
     .set('Accept', 'application/json')
     .end((err, res) => {
       if(err)
@@ -21,10 +21,12 @@ export function fetchList(page) {
           from        : data.from,
           to          : data.to
         }
-        deferred.resolve({
-          data: data.data,
-          meta
-        })
+        setTimeout(()=> {
+          deferred.resolve({
+            data: data.data,
+            meta
+          })
+        }, 3000)
       }
     })
   return deferred.promise

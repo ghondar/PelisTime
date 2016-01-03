@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react'
-import masonry from 'react-masonry-component'
 import InfiniteScrollify from './InfiniteScrollify.jsx'
 
 // Custom components
@@ -15,12 +14,6 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 // CSS Styles
 import '../../css/grid.css'
 import '../../css/videos.css'
-
-const Masonry = masonry(React)
-
-const masonryOptions = {
-  transitionDuration: 0
-}
 
 class ListVideo extends Component{
 
@@ -43,7 +36,7 @@ class ListVideo extends Component{
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll, false)
+    document.querySelector('#scroll').addEventListener('scroll', this.onScroll, false)
     this.setState({
       mounted: true
     })
@@ -71,7 +64,7 @@ class ListVideo extends Component{
     this.setState({
       mounted: false
     })
-    window.removeEventListener('scroll', this.onScroll, false)
+    document.querySelector('#scroll').removeEventListener('scroll', this.onScroll, false)
   }
 
   getScrollState(props) {
@@ -80,7 +73,7 @@ class ListVideo extends Component{
     const MARGIN_TOP = 20
     const ROW_HEIGHT = 262
     const ITEMS_PER_ROW = 5
-    const scrollY = window.scrollY
+    const scrollY = document.querySelector('#scroll').scrollTop
     let paddingTop = 0
     let paddingBottom = 0
     let start = 0
@@ -147,21 +140,22 @@ class ListVideo extends Component{
   }
 
   render() {
-    const { videos } = this.props
+    const { videos, loading } = this.props
     const { end, paddingBottom, paddingTop, start } = this.state
 
     return (
-      <Masonry
-        ref='masonry'
-        elementType={'ul'}
-        options={masonryOptions}
-        className='content'
-        disableImagesLoaded={false}>
-        <div className='padder' style={{ height: paddingTop }}></div>
-          {this.renderVideos(start, end)}
-        <div className='padder' style={{ height: paddingBottom }}></div>
-        {this.props.videoStore.Loading ? <Spinner /> : null}
-      </Masonry>
+      <div
+        id='scroll'
+        className='scroll-content'>
+        <ul
+          id='ul'
+          className='content'>
+          <div className='padder' style={{ height: paddingTop }}></div>
+            {this.renderVideos(start, end)}
+          <div className='padder' style={{ height: paddingBottom }}></div>
+          {loading ? <Spinner /> : null}
+        </ul>
+      </div>
     )
   }
 }

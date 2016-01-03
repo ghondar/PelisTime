@@ -1,9 +1,10 @@
 import { SET_VIDEOS, LOADING_VIDEOS, SET_DETAIL, LOADING_DETAIL } from '../constants/ActionTypes'
 import { fetchList, fetchDescription } from '../middleware/api'
 
-function setVideos(json) {
+function setVideos(view, json) {
   return {
     type: SET_VIDEOS,
+    view,
     json
   }
 }
@@ -15,25 +16,33 @@ function setDetail(json) {
   }
 }
 
-export function setLoad(type, Loading) {
+export function setLoadVideo(view, Loading) {
   return {
-    type,
+    type: LOADING_VIDEOS,
+    view,
     Loading
   }
 }
 
-export function fetchVideos(page) {
+export function setLoadDetail(Loading) {
+  return {
+    type: LOADING_DETAIL,
+    Loading
+  }
+}
+
+export function fetchVideos(view, page) {
   return dispatch => {
-    dispatch(setLoad(LOADING_VIDEOS, true))
-    fetchList(page)
+    dispatch(setLoadVideo(view, true))
+    fetchList(view, page)
       .then(data => {
-        dispatch(setVideos(Object.assign({}, data, {
+        dispatch(setVideos(view, Object.assign({}, data, {
           Success: true
         })))
-        dispatch(setLoad(LOADING_VIDEOS, false))
+        dispatch(setLoadVideo(view, false))
       })
       .catch(err => {
-        dispatch(setVideos({
+        dispatch(setVideos(view, {
           Success: false,
           Loading: false
         }))
@@ -43,7 +52,7 @@ export function fetchVideos(page) {
 
 export function fetchDetail(id) {
   return dispatch => {
-    dispatch(setLoad(LOADING_DETAIL, {
+    dispatch(setLoadDetail({
       data: true,
       id
     }))
@@ -53,7 +62,7 @@ export function fetchDetail(id) {
           data: Object.assign({}, data, { Success: true }),
           id
         }))
-        dispatch(setLoad(LOADING_DETAIL, {
+        dispatch(setLoadDetail({
           data: false,
           id
         }))

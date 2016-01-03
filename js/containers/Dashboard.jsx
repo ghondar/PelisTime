@@ -1,11 +1,19 @@
 import React, { PropTypes, Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as viewActions from '../actions/viewActions'
+import * as videoActions from '../actions/videoActions'
 
 // Custom Components
 import ListVideoContainer from './ListVideoContainer.jsx'
+import Toolbar from '../components/Toolbar.jsx'
 
-// Material Compoennts
-// import AppBar from 'material-ui/lib/app-bar'
+// Material Components
+import AppBar from 'material-ui/lib/app-bar'
 
+@connect(state => ({
+  videoStore: state.videoStore
+}))
 export default class Dashboard extends Component{
 
   constructor(props, context) {
@@ -13,14 +21,14 @@ export default class Dashboard extends Component{
   }
 
   render() {
+    const { dispatch, videoStore } = this.props
+
     return (
       <main className='container'>
-        {/*<AppBar
-          title='Title'
-          iconClassNameRight='muidocs-icon-navigation-expand-more'
-          style={{
-            position: 'fixed',
-            top     : 0 }} />*/}
+        <Toolbar
+          videoStore = {videoStore}
+          {...bindActionCreators(viewActions, dispatch)}
+          {...bindActionCreators(videoActions, dispatch)}/>
         {this.props.children}
       </main>
     )

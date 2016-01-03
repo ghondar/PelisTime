@@ -19,11 +19,11 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width : 1200,
-    height: 900,
-    minWidth: 1200,
+    width    : 1200,
+    height   : 900,
+    minWidth : 1200,
     minHeight: 900,
-    center: true
+    center   : true
   })
 
   if (process.env.DEBUG) {

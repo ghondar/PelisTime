@@ -38,15 +38,3 @@
     padding-right: 0;
 }
 
-.padder {
-    visibility: hidden;
-}
-
-.content {
-    margin: 40px 50px 30px 50px;
-}
-
-.sticky .content {
-    margin-top: 80px;
-}
-

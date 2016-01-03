@@ -78,12 +78,12 @@
 body {
   font-family: 'Oswald', Roboto, Arial, sans-serif;
   font-weight: 300;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .container {
-  width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
 }
 
 .clearfix:after {
