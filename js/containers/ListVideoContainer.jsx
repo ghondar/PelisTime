@@ -16,7 +16,8 @@ export default class ListVideoContainer extends Component{
   componentWillMount() {
     const { dispatch, viewStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    actions.fetchVideos(viewStore.view, 1)
+    if(viewStore.view !== 'search')
+      actions.fetchVideos(viewStore.view, 1)
   }
 
   render() {
@@ -30,14 +31,16 @@ export default class ListVideoContainer extends Component{
         videos     : stateVideos.data,
         currentPage: stateVideos.meta.current_page,
         lastPage   : stateVideos.meta.last_page,
-        loading    : stateVideos.Loading
+        loading    : stateVideos.Loading,
+        success    : stateVideos.Success
       }
     }else {
       data = {
         videos     : [],
         currentPage: 1,
         lastPage   : 2,
-        loading    : true
+        loading    : true,
+        success    : false
       }
     }
 

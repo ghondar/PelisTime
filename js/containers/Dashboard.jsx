@@ -12,6 +12,7 @@ import Toolbar from '../components/Toolbar.jsx'
 import AppBar from 'material-ui/lib/app-bar'
 
 @connect(state => ({
+  viewStore: state.viewStore,
   videoStore: state.videoStore
 }))
 export default class Dashboard extends Component{
@@ -21,12 +22,13 @@ export default class Dashboard extends Component{
   }
 
   render() {
-    const { dispatch, videoStore } = this.props
+    const { dispatch, videoStore, viewStore } = this.props
 
     return (
       <main className='container'>
         <Toolbar
-          videoStore = {videoStore}
+          videoStore= {videoStore}
+          viewStore= {viewStore}
           {...bindActionCreators(viewActions, dispatch)}
           {...bindActionCreators(videoActions, dispatch)}/>
         {this.props.children}

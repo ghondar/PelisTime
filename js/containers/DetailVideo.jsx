@@ -35,7 +35,7 @@ export default class DetailVideo extends Component{
     const { id } = this.props.location.state
     const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore[ id ] || { Loading : true }
 
-    const childComponents = Loading ? <Spinner /> : (
+    const childComponents = Loading ? <Spinner simple={true} /> : (
       <div style={{ margin: 20 }}>
         <DescriptionVideo
           name={name}

@@ -11,7 +11,7 @@ import Divider from 'material-ui/lib/divider'
 import List from 'material-ui/lib/lists/list'
 import ListItem from 'material-ui/lib/lists/list-item'
 
-const types = {
+const titles = {
   Estrenos: 'releases',
   Popular : 'popular'
 }
@@ -22,15 +22,17 @@ export default class Toolbar extends Component{
     super(props, context)
     this.state = {
       open : false,
-      title: Object.keys(types)[ 0 ]
+      title: Object.keys(titles)[ 0 ]
     }
   }
 
   render() {
+    const { setView, clearVideos, videoStore, viewStore, fetchVideosSearch } = this.props
+
     return (
       <div>
         <AppBar
-          title={this.state.title}
+          title={viewStore.title}
           onLeftIconButtonTouchTap={::this._handleToggle}
           style={{
             position: 'fixed',
@@ -38,7 +40,13 @@ export default class Toolbar extends Component{
             left    : 0,
             right   : 0
           }}>
-          <SearchBox />
+          <SearchBox
+            ref='searchbox'
+            clearVideos={clearVideos}
+            setView={setView}
+            videoStore={videoStore}
+            viewStore={viewStore}
+            fetchVideosSearch={fetchVideosSearch}/>
         </AppBar>
           <LeftNav
             docked={false}
@@ -50,11 +58,14 @@ export default class Toolbar extends Component{
             <ListItem
               primaryText='Peliculas'
               initiallyOpen={true}
-              nestedItems={Object.keys(types).map((type) =>  (
+              nestedItems={Object.keys(titles).map((title) =>  (
                 <ListItem
-                  key={type}
-                  primaryText={type}
-                  onTouchTap={this._handleChangeView.bind(this, types[ type ])}/>
+                  key={title}
+                  primaryText={title}
+                  onTouchTap={this._handleChangeView.bind(this, {
+                    title,
+                    view: titles[ title ]
+                  })}/>
               ))}
             />
           </List>
@@ -63,15 +74,17 @@ export default class Toolbar extends Component{
     )
   }
 
-  _handleChangeView(view) {
+  _handleChangeView(json) {
     const { setView, fetchVideos, videoStore } = this.props
-    setView(view)
-    if(!videoStore[ view ]) {
-      fetchVideos(view, 1)
+    setView(json)
+    this.refs.searchbox.refs.inputSearch.value = ''
+
+    if(!videoStore[ json.view ]) {
+      fetchVideos(json.view, 1)
     }
     this.setState({
       open : !this.state.open,
-      title: view
+      title: json.title
     })
   }
 

@@ -5,12 +5,6 @@ import InfiniteScrollify from './InfiniteScrollify.jsx'
 import CardVideo from './CardVideo.jsx'
 import Spinner from './Spinner.jsx'
 
-// Material components
-import GridList from 'material-ui/lib/grid-list/grid-list'
-import GridTile from 'material-ui/lib/grid-list/grid-tile'
-import CircularProgress from 'material-ui/lib/circular-progress'
-// import RaisedButton from 'material-ui/lib/raised-button'
-
 // CSS Styles
 import '../../css/grid.css'
 import '../../css/videos.css'
@@ -140,7 +134,7 @@ class ListVideo extends Component{
   }
 
   render() {
-    const { videos, loading } = this.props
+    const { videos, loading, success } = this.props
     const { end, paddingBottom, paddingTop, start } = this.state
 
     return (
@@ -153,7 +147,8 @@ class ListVideo extends Component{
           <div className='padder' style={{ height: paddingTop }}></div>
             {this.renderVideos(start, end)}
           <div className='padder' style={{ height: paddingBottom }}></div>
-          {loading ? <Spinner /> : null}
+          {loading && !success ? <Spinner videoStore={this.props.videoStore} viewStore={this.props.viewStore}/> :
+          videos.length > 0 ? null : <h2>No se encontro videos...</h2>}
         </ul>
       </div>
     )

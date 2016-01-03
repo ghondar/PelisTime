@@ -16,12 +16,17 @@ export default function(InnerComponent) {
     }
 
     onScroll() {
-      const { loading, fetchVideos, currentPage, lastPage, viewStore } = this.props
+      const { loading, fetchVideos, fetchVideosSearch, currentPage, lastPage, viewStore, videoStore } = this.props
       const scroll = document.querySelector('#scroll')
 
       if ((window.innerHeight + scroll.scrollTop) >= document.querySelector('#ul').offsetHeight) {
-        if(!loading && (currentPage < lastPage))
-          fetchVideos(viewStore.view, currentPage + 1)
+        if(!loading && (currentPage < lastPage)) {
+          if(viewStore.view === 'search') {
+            fetchVideosSearch(videoStore[ viewStore.view ].words, currentPage + 1)
+          }else {
+            fetchVideos(viewStore.view, currentPage + 1)
+          }
+        }
       }
     }
 
@@ -31,11 +36,12 @@ export default function(InnerComponent) {
   }
 
   InfiniteScrollComponent.propTypes = {
-    fetchVideos: PropTypes.func.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    lastPage   : PropTypes.number.isRequired,
-    loading    : PropTypes.bool.isRequired,
-    viewStore  : PropTypes.object.isRequired
+    fetchVideos      : PropTypes.func.isRequired,
+    fetchVideosSearch: PropTypes.func.isRequired,
+    currentPage      : PropTypes.number.isRequired,
+    lastPage         : PropTypes.number.isRequired,
+    loading          : PropTypes.bool.isRequired,
+    viewStore        : PropTypes.object.isRequired
   }
 
   return InfiniteScrollComponent

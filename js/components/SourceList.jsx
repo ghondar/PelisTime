@@ -99,7 +99,7 @@ export default class SourceList extends Component{
               <TableHeaderColumn tooltip='Calidad de Video'>Formato</TableHeaderColumn>
               <TableHeaderColumn tooltip='Peso'>Peso</TableHeaderColumn>
               <TableHeaderColumn tooltip='Fecha de Subida'>Subido</TableHeaderColumn>
-              <TableHeaderColumn tooltip='Estado del Torrent'>Estado</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Salud del Torrent'>Salud</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody

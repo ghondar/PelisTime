@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
-import Q from 'q'
 import torrentHealth from 'torrent-health'
+
+// Custom Components
+import PointStatus from '../components/PointStatus.jsx'
 
 // Material Components
 import CircularProgress from 'material-ui/lib/circular-progress'
@@ -57,7 +59,7 @@ export default class HealthTorrent extends Component{
     const { seeds, peers, loading } = this.state
 
     return (
-      <span>{loading ? <CircularProgress mode='indeterminate' size={0.3} /> : `Semillas: ${seeds} - Pares: ${peers}`}</span>
+      <span>{loading ? <CircularProgress mode='indeterminate' size={0.3} /> : <PointStatus seeds={seeds} peers={peers}/>}</span>
     )
   }
 }
