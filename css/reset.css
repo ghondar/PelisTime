@@ -76,6 +76,11 @@
   user-select: none;
 }
 
+html /deep/ *{
+  min-width: auto !important; 
+  min-height: auto !important; 
+}
+
 h1, h2, p {
   cursor: default;
 }

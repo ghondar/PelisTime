@@ -18,7 +18,6 @@ export default function(InnerComponent) {
     onScroll() {
       const { loading, fetchVideos, fetchVideosSearch, currentPage, lastPage, viewStore, videoStore } = this.props
       const scroll = document.querySelector('#scroll')
-
       if ((window.innerHeight + scroll.scrollTop) >= document.querySelector('#ul').offsetHeight) {
         if(!loading && (currentPage < lastPage)) {
           if(viewStore.view === 'search') {
