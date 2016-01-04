@@ -50,7 +50,7 @@ export default class SourceList extends Component{
         onTouchTap={::this._onDialogCancel} />
     ]
     const body = this.props.sources.map(source => {
-      let name = /([^\/]+(torrent)$|$)/.exec(source.nombre)[ 0 ].split('.torrent')[ 0 ]
+      const name = /([^\/]+(torrent)$|$)/.exec(source.nombre)[ 0 ].split('.torrent')[ 0 ]
 
       return (
       <TableRow key={source.nombre}>

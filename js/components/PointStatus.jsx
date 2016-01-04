@@ -11,6 +11,7 @@ export default class PointStatus extends Component{
 
   componentWillMount() {
     const { peers, seeds } = this.props
+
     if(peers > 50 && seeds > 30) {
       this.setState({
         color: '#009E1D'

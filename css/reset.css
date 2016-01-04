@@ -73,6 +73,19 @@
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
+}
+
+h1, h2, p {
+  cursor: default;
+}
+
+td {
+  cursor: pointer;
+}
+
+.disable-text-select {
+  cursor: default;
 }
 
 body {

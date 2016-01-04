@@ -30,7 +30,7 @@ export default class DescriptionVideo extends Component{
     const { name, plot, type, duration, year, rating, genre } = this.props
 
     return (
-      <div>
+      <div className='disable-text-select'>
         <h2>{name}</h2>
         <p>{plot}</p>
         <span>{type},</span>

@@ -29,6 +29,7 @@ export default class Player extends Component{
     if(timeout)
       clearTimeout(timeout)
 
+    global.destroyVideo && global.destroyVideo()
     this.player.stop()
   }
 
