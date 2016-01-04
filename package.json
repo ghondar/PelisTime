@@ -1,6 +1,6 @@
 {
   "name": "PelisTime",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "PelisTime basado en peerflix, empaquetado con electron.",
   "main": "index.js",
   "scripts": {
