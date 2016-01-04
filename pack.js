@@ -3,7 +3,7 @@ var path = require('path')
 var packager = require('electron-packager')
 var fse = require('fs-extra')
 var spawn = require('child_process').spawn
-var arch = require('os').platform()
+var platform = require('os').platform()
 
 var compiler = require('electron-compile')
 
@@ -16,11 +16,13 @@ var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modul
 var webchimera = {
   darwin: {
     path: `/PelisTime.app/Contents/Resources/app/${pathModule}`,
-    ico : 'img/osx.icns'
+    ico : 'img/osx.icns',
+    arch: 'x64'
   },
   win32 : {
     path: `/resources/app/${pathModule}`,
-    ico : 'img/windows.ico'
+    ico : 'img/windows.ico',
+    arch: 'all'
   }
 }
 
@@ -40,9 +42,9 @@ fs.writeFileSync(
 packager({
   dir             : '.',
   name            : packageJson.name,
-  platform        : arch,
-  icon            : webchimera[ arch ].ico,
-  arch            : 'x64',
+  platform        : platform,
+  icon            : webchimera[ platform ].ico,
+  arch            : webchimera[ platform ].arch,
   version         : require('electron-prebuilt/package.json').version,
   'build-version' : packageJson.version,
   'version-string': {
@@ -59,9 +61,9 @@ packager({
 }, function(err, appPath) {
   if (err) return console.error(err)
   appPath.forEach(function(dir) {
-    fse.remove(`${dir}${webchimera[ arch ].path}webchimera.js/`, function(err) {
+    fse.remove(`${dir}${webchimera[ platform ].path}webchimera.js/`, function(err) {
       if(dir.indexOf('darwin') !== -1) {
-        var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ arch ].path}` ])
+        var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ platform ].path}` ])
         unzip.stdout.on('data', function(output) {
           console.log('data: ', output.toString('utf8'))
         })
@@ -73,7 +75,11 @@ packager({
         })
       }else if(dir.indexOf('win32') !== -1) {
         var unzip = require('unzip')
-        fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ arch ].path}` }))
+        if(dir.indexOf('ia32')){
+          fs.createReadStream('./binVideo/win-ia32.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
+        }else{
+          fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
+        }
       }
     })
   })

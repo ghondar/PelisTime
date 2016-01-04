@@ -11,7 +11,8 @@
   },
   "win" : {
     "title" : "PelisTime",
-    "version" : "0.1.0",
+    "version" : "1.0.0",
+    "publisher": "PelisTime Inc.",
     "icon" : "img/windows.ico",
     "verbosity": 1
   }
