@@ -1,26 +1,24 @@
-# My-Electron-Redux-Boilerplate
-Electron application boilerplate based on React, Redux, Redux DevTools, Webpack, Bootstrap.
+# PelisTime
+Un espacio multimedia basado en peerflix, React y empaquetado con electron.
 
-![](./docs/screenshot.png)
+![](./img/logo.png)
 
 ## Setup
 ```shell
-$ git clone git@github.com:proshunsuke/my-electron-redux-boilerplate.git
-$ cd my-electron-redux-boilerplate
-$ bower install & npm install
+$ git clone https://github.com/ghondar/PelisTime.git
+$ cd PelisTime
+$ npm install
 ```
 
 ## Run
 
-run webpack dev server
+run webpack dev server:
 
 ```shell
 $ npm run start-dev-server
 ```
 
-and, in another terminal.
-
-run electron
+and, in another terminal, run electron:
 
 ```shell
 $ npm run start-dev
@@ -28,20 +26,26 @@ $ npm run start-dev
 
 ## Build and Package
 
-to build
+build bundle.js:
 
 ```shell
 $ npm run build
 ```
 
-package your app using electron-packager
+package project:
 
 ```shell
-$ ./node_modules/.bin/electron-packager <sourcedir> <appname> --platform=<platform> --arch=<arch> --version=<version>
+$ npm run pack
 ```
 
-see more detail https://github.com/maxogden/electron-packager
+create installer on windows:
 
-## Bibliography
-- https://github.com/banderson/generator-redux
-- https://github.com/airtoxin/Electron-React-Boilerplate
+```shell
+$ npm run installer:win
+```
+
+create installer on osx:
+
+```shell
+$ npm run installer:osx
+```
