@@ -10,6 +10,14 @@ $ cd PelisTime
 $ npm install
 ```
 
+## If you want player binaries
+create folder:
+```shell
+$ mkdir binVideo
+```
+you can download binaries from [Here](https://mega.nz/#F!0MYjBSoA!vYWKOf_Y4NeO8XABmv73QA),
+and place the files zip in the folder
+
 ## Run
 
 run webpack dev server:
