@@ -1,7 +1,7 @@
 # PelisTime
 Un espacio multimedia basado en peerflix, React y empaquetado con electron.
 
-![](./img/logo.png)
+![](img/logo.png)
 
 ## Setup
 ```shell
