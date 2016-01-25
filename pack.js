@@ -75,7 +75,7 @@ packager({
         })
       }else if(dir.indexOf('win32') !== -1) {
         var unzip = require('unzip')
-        if(dir.indexOf('ia32')) {
+        if(dir.indexOf('ia32') !== -1) {
           fs.createReadStream('./binVideo/win-ia32.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
         }else {
           fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
