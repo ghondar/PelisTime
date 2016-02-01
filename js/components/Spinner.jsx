@@ -16,7 +16,7 @@ export default class Spinner extends Component{
     const { videoStore, viewStore, simple } = this.props
 
     if(!simple) {
-      const videos = this.props.videoStore[ this.props.viewStore.view ]
+      const videos = videoStore[ viewStore.type + viewStore.view ]
 
       if(videos && !videos.Loading) {
         this.setState({

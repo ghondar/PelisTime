@@ -42,7 +42,8 @@ export default class SearchBox extends Component{
       this.props.clearVideos('search')
       this.props.setView({
         title: 'Buscar',
-        view : 'search'
+        view : 'search',
+        type : ''
       })
     }
   }

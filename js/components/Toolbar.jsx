@@ -11,9 +11,42 @@ import Divider from 'material-ui/lib/divider'
 import List from 'material-ui/lib/lists/list'
 import ListItem from 'material-ui/lib/lists/list-item'
 
-const titles = {
-  Estrenos: 'releases',
-  Popular : 'popular'
+const sections = {
+  movies : [
+    {
+      title: 'Estrenos',
+      view : 'releases'
+    }, {
+      title: 'Popular',
+      view : 'popular'
+    }, {
+      title: 'Ranking',
+      view : 'ranking'
+    }, {
+      title: 'Todos',
+      view : 'all'
+    }
+  ],
+  tvshows: [
+    {
+      title: 'Nuevos Episodios',
+      view : 'newepisodes'
+    }, {
+      title: 'Popular',
+      view : 'popular'
+    }, {
+      title: 'Ranking',
+      view : 'ranking'
+    }, {
+      title: 'Todos',
+      view : 'all'
+    }
+  ]
+}
+
+const alias = {
+  movies : 'Peliculas',
+  tvshows: 'Series'
 }
 
 export default class Toolbar extends Component{
@@ -22,7 +55,7 @@ export default class Toolbar extends Component{
     super(props, context)
     this.state = {
       open : false,
-      title: Object.keys(titles)[ 0 ]
+      title: sections.movies[ 0 ].title
     }
   }
 
@@ -32,7 +65,7 @@ export default class Toolbar extends Component{
     return (
       <div>
         <AppBar
-          title={viewStore.title}
+          title={viewStore.view === 'search' ? viewStore.title : `${alias[ viewStore.type ]} - ${viewStore.title}`}
           onLeftIconButtonTouchTap={::this._handleToggle}
           style={{
             position: 'fixed',
@@ -55,19 +88,22 @@ export default class Toolbar extends Component{
             onRequestChange={open => this.setState({ open })}
           >
           <List>
-            <ListItem
-              primaryText='Peliculas'
-              initiallyOpen={true}
-              nestedItems={Object.keys(titles).map((title) =>  (
-                <ListItem
-                  key={title}
-                  primaryText={title}
-                  onTouchTap={this._handleChangeView.bind(this, {
-                    title,
-                    view: titles[ title ]
-                  })}/>
-              ))}
-            />
+            {Object.keys(sections).map((type, i) => (
+              <ListItem
+                key={i}
+                primaryText={alias[ type ]}
+                initiallyOpen={true}
+                nestedItems={sections[ type ].map((section, index) => (
+                  <ListItem
+                    key={index}
+                    primaryText={section.title}
+                    onTouchTap={this._handleChangeView.bind(this, {
+                      ...section,
+                      type
+                    })}/>
+                ))}
+              />
+            ))}
           </List>
         </LeftNav>
       </div>
@@ -79,8 +115,8 @@ export default class Toolbar extends Component{
     setView(json)
     this.refs.searchbox.refs.inputSearch.value = ''
 
-    if(!videoStore[ json.view ]) {
-      fetchVideos(json.view, 1)
+    if(!videoStore[ json.type + json.view ]) {
+      fetchVideos(json, 1)
     }
     this.setState({
       open : !this.state.open,

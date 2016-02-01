@@ -2,7 +2,8 @@ import * as ActionTypes from '../constants/ActionTypes'
 
 const defaultState = {
   title: 'Estrenos',
-  view : 'releases'
+  view : 'releases',
+  type : 'movies'
 }
 
 export default function videoStore(state = defaultState, action) {

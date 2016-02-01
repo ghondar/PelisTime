@@ -38,23 +38,25 @@ export function clearVideos(view) {
   }
 }
 
-export function fetchVideos(view, page) {
+export function fetchVideos(json, page) {
+  const generated = json.type + json.view
+
   return dispatch => {
-    dispatch(setLoadVideo(view, {
+    dispatch(setLoadVideo(generated, {
       Loading: true,
       Success: false
     }))
-    fetchList(view, page)
+    fetchList(json, page)
       .then(data => {
-        dispatch(setVideos(view, Object.assign({}, data, {
+        dispatch(setVideos(generated, Object.assign({}, data, {
           Success: true
         })))
-        dispatch(setLoadVideo(view, {
+        dispatch(setLoadVideo(generated, {
           Loading: false
         }))
       })
       .catch(err => {
-        dispatch(setVideos(view, {
+        dispatch(setVideos(generated, {
           Success: false,
           Loading: false
         }))

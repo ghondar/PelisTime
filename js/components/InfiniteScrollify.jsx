@@ -21,9 +21,9 @@ export default function(InnerComponent) {
       if ((window.innerHeight + scroll.scrollTop) >= document.querySelector('#ul').offsetHeight) {
         if(!loading && (currentPage < lastPage)) {
           if(viewStore.view === 'search') {
-            fetchVideosSearch(videoStore[ viewStore.view ].words, currentPage + 1)
+            fetchVideosSearch(videoStore[ viewStore.type + viewStore.view ].words, currentPage + 1)
           }else {
-            fetchVideos(viewStore.view, currentPage + 1)
+            fetchVideos(viewStore, currentPage + 1)
           }
         }
       }
