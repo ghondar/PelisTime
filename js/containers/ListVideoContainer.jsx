@@ -16,7 +16,7 @@ export default class ListVideoContainer extends Component{
   componentWillMount() {
     const { dispatch, viewStore, videoStore } = this.props
     const actions = bindActionCreators(videoActions, dispatch)
-    if(viewStore.view !== 'search' && !videoStore[ viewStore.view ])
+    if(viewStore.view !== 'search' && !videoStore[ viewStore.type + viewStore.view ])
       actions.fetchVideos(viewStore, 1)
   }
 
