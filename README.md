@@ -1,7 +1,7 @@
 # PelisTime
 Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con electron.
 
-![](logo/logo.png)
+![](icon/logo.png)
 
 ## Previus config
 * the project only work on npm@2.x.x
