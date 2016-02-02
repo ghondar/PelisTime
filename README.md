@@ -1,7 +1,7 @@
 # PelisTime
 Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con electron.
 
-![](img/logo.png)
+![](logo/logo.png)
 
 ## Previus config
 * the project only work on npm@2.x.x
@@ -13,6 +13,12 @@ Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con
 $ git clone https://github.com/ghondar/PelisTime.git
 $ cd PelisTime
 $ npm install
+```
+
+if you are on linux:
+
+```shell
+$ sudo apt-get install vlc
 ```
 
 ## If you want player binaries
