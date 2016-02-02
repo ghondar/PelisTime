@@ -4,6 +4,7 @@ var packager = require('electron-packager')
 var fse = require('fs-extra')
 var spawn = require('child_process').spawn
 var platform = require('os').platform()
+var zipFolder = require('zip-folder')
 
 var compiler = require('electron-compile')
 
@@ -23,6 +24,11 @@ var webchimera = {
     path: `/resources/app/${pathModule}`,
     ico : 'img/windows.ico',
     arch: 'all'
+  },
+  linux : {
+    path: `/resources/app/${pathModule}`,
+    ico : 'img/windows.ico',
+    arch: 'x64'
   }
 }
 
@@ -61,27 +67,38 @@ packager({
 }, function(err, appPath) {
   if (err) return console.error(err)
   appPath.forEach(function(dir) {
-    fse.remove(`${dir}${webchimera[ platform ].path}webchimera.js/`, function(err) {
-      if(dir.indexOf('darwin') !== -1) {
-        var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ platform ].path}` ])
-        unzip.stdout.on('data', function(output) {
-          console.log('data: ', output.toString('utf8'))
-        })
-        unzip.stderr.on('data', function(err) {
-          console.log('Error: ', err.toString('utf8'))
-        })
-        unzip.on('exit', function(code) {
-          console.log('Package osx finished.')
-        })
-      }else if(dir.indexOf('win32') !== -1) {
-        var unzip = require('unzip')
-        if(dir.indexOf('ia32') !== -1) {
-          fs.createReadStream('./binVideo/win-ia32.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
-        }else {
-          fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
+    if(dir.indexOf('linux') !== -1) {
+      var unzip = require('unzip')
+      fs.createReadStream('./binVideo/linux-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}/Release/` }))
+      zipFolder(`./${dir}`, './dist/Pelistime-linux-64bits.zip', function(err) {
+        if(err)
+          console.log('error')
+        else
+          console.log('finished')
+      })
+    }else {
+      fse.remove(`${dir}${webchimera[ platform ].path}webchimera.js/`, function(err) {
+        if(dir.indexOf('darwin') !== -1) {
+          var unzip  = spawn('unzip', [ './binVideo/osx-64bits.zip', '-d', `${dir}${webchimera[ platform ].path}` ])
+          unzip.stdout.on('data', function(output) {
+            console.log('data: ', output.toString('utf8'))
+          })
+          unzip.stderr.on('data', function(err) {
+            console.log('Error: ', err.toString('utf8'))
+          })
+          unzip.on('exit', function(code) {
+            console.log('Package osx finished.')
+          })
+        }else if(dir.indexOf('win32') !== -1) {
+          var unzip = require('unzip')
+          if(dir.indexOf('ia32') !== -1) {
+            fs.createReadStream('./binVideo/win-ia32.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
+          }else {
+            fs.createReadStream('./binVideo/win-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}` }))
+          }
         }
-      }
-    })
+      })
+    }
   })
 })
 

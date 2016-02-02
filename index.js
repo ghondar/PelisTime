@@ -23,7 +23,8 @@ app.on('ready', function() {
     height   : 900,
     minWidth : 1200,
     minHeight: 900,
-    center   : true
+    center   : true,
+    icon     : './logo/logo.png'
   })
 
   if (process.env.DEBUG) {
