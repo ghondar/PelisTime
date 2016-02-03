@@ -69,7 +69,7 @@ packager({
   appPath.forEach(function(dir) {
     if(dir.indexOf('linux') !== -1) {
       var unzip = require('unzip')
-      fs.createReadStream('./binVideo/linux-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}/Release/` }))
+      fs.createReadStream('./binVideo/linux-64bits.zip').pipe(unzip.Extract({ path: `./${dir}${webchimera[ platform ].path}webchimera.js/Release/` }))
       zipFolder(`./${dir}`, './dist/Pelistime-linux-64bits.zip', function(err) {
         if(err)
           console.log('error')
