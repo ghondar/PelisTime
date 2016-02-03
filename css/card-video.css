@@ -24,4 +24,7 @@
   .paper{
     width: 100%;
   }
+  body{
+    zoom: .6;
+  }
 }
