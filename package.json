@@ -80,5 +80,28 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.1",
     "webpack-dev-server": "^1.10.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghondar/PelisTime-Mobile.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "redux",
+    "react-router",
+    "electron",
+    "material-ui",
+    "pelicula",
+    "movie",
+    "tvshow",
+    "serie",
+    "torrent"
+  ],
+  "author": "Ghondar <abgv9221@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ghondar/PelisTime-Mobile/issues"
+  },
+  "homepage": "https://github.com/ghondar/PelisTime-Mobile#readme"
 }
