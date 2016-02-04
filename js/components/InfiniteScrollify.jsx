@@ -14,7 +14,7 @@ export default function(InnerComponent) {
     componentDidMount() {
       document.querySelector('#scroll').addEventListener('scroll', this.onScroll, false)
       if(window.matchMedia) {
-        this.mq = window.matchMedia('(max-width: 765px)')
+        this.mq = window.matchMedia('(max-width: 1063px)')
         this.mq.addListener(this.WidhChange.bind(this))
         this.WidhChange.call(this, this.mq)
       }
