@@ -1,6 +1,6 @@
 {
   "name": "PelisTime",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Un espacio multimedia basado en peerflix, React y empaquetado con electron.",
   "main": "index.js",
   "scripts": {
