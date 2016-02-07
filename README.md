@@ -3,6 +3,9 @@ Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con
 
 ![](icon/logo.png)
 
+
+> Player dont work on windows
+
 ## Previus config
 * the project only work on npm@2.x.x
 ```shell
@@ -24,14 +27,6 @@ if you are on linux:
 $ sudo apt-get install vlc
 ```
 
-## If you want player binaries
-create folder:
-```shell
-$ mkdir binVideo
-```
-you can download binaries from [Here](https://mega.nz/#F!0MYjBSoA!vYWKOf_Y4NeO8XABmv73QA),
-and place the files zip in the folder
-
 ## Run
 
 run webpack dev server:
@@ -48,7 +43,7 @@ $ npm run start-dev
 
 ## Build and Package
 
-### Quick run: linux, osx or windows
+### Quick run: linux or osx
 
 ```shell
 $ npm run all:linux
@@ -58,9 +53,9 @@ $ npm run all:linux
 $ npm run all:osx
 ```
 
-```shell
-$ npm run all:win
-```
+<!--```shell-->
+<!--$ npm run all:win-->
+<!--```-->
 
 ### Or step by step run
 
@@ -76,11 +71,11 @@ package project:
 $ npm run pack
 ```
 
-create installer on windows:
+<!--create installer on windows:-->
 
-```shell
-$ npm run installer:win
-```
+<!--```shell-->
+<!--$ npm run installer:win-->
+<!--```-->
 
 create installer on osx:
 
