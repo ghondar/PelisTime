@@ -94,7 +94,7 @@ var listSourcesWebchimera = {
     path : `/resources/app/${pathModule}`,
     ico  : 'img/windows.ico',
     arch : 'x64',
-    bin64: './dist/Pelistime-linux-64bits.zip',
+    bin64: './binVideo/linux-64bits.zip',
     url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/linux-64bits.zip'
   }
 }
