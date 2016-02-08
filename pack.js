@@ -43,6 +43,7 @@ var listSourcesWebchimera = {
 }
 
 var sourceWebchimera = listSourcesWebchimera[ platform ]
+var progress = {}
 
 function downloadAsync(downloadFile, path) {
   return Q.Promise(function(resolve, reject) {
@@ -77,8 +78,9 @@ function download(downloadFile, path, cb) {
     total = res.headers[ 'content-length' ]
 
     intervalo = setInterval(function() {
-      // console.log('Download progress: ' + dlprogress + ' bytes')
-      log('Downloading ' + path + ': ' + (dlprogress * 100 / total).toFixed(0) + '%')
+      progress[path] = ('Downloading ' + path + ': ' + (dlprogress * 100 / total).toFixed(0) + '%')
+      var stringOutput = Object.keys(progress).map(key => progress[key] )
+      log(stringOutput.join('\n'))
       if(dlprogress == total) {
         clearInterval(intervalo)
       }
