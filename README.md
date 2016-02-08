@@ -4,8 +4,6 @@ Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con
 ![](icon/logo.png)
 
 
-> Player dont work on windows
-
 ## Previus config
 * the project only work on npm@2.x.x
 ```shell
