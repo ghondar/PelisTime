@@ -3,12 +3,46 @@ var Q = require('q')
 var url = require('url')
 var path = require('path')
 var https = require('https')
+var log = require('single-line-log').stdout
 var packager = require('electron-packager')
 var fse = require('fs-extra')
 var spawn = require('child_process').spawn
 var platform = require('os').platform()
 var zipFolder = require('zip-folder')
 var compiler = require('electron-compile')
+
+var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
+var listSourcesWebchimera = {
+  darwin: {
+    path : `/PelisTime.app/Contents/Resources/app/${pathModule}`,
+    ico  : 'img/osx.icns',
+    arch : 'x64',
+    bin64: './binVideo/osx-64bits.zip',
+    url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/osx-64bits.zip'
+  },
+  win32 : {
+    path : `/resources/app/${pathModule}`,
+    ico  : 'img/windows.ico',
+    arch : 'all',
+    bin32: {
+      path: './binVideo/win-ia32.zip',
+      url : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/win-ia32.zip'
+    },
+    bin64: {
+      path: './binVideo/win-64bits.zip',
+      url : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/win-64bits.zip'
+    }
+  },
+  linux : {
+    path : `/resources/app/${pathModule}`,
+    ico  : 'img/windows.ico',
+    arch : 'x64',
+    bin64: './binVideo/linux-64bits.zip',
+    url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/linux-64bits.zip'
+  }
+}
+
+var sourceWebchimera = listSourcesWebchimera[ platform ]
 
 function downloadAsync(downloadFile, path) {
   return Q.Promise(function(resolve, reject) {
@@ -44,7 +78,7 @@ function download(downloadFile, path, cb) {
 
     intervalo = setInterval(function() {
       // console.log('Download progress: ' + dlprogress + ' bytes')
-      console.log((dlprogress * 100 / total).toFixed(0) + '%')
+      log('Downloading ' + path + ': ' + (dlprogress * 100 / total).toFixed(0) + '%')
       if(dlprogress == total) {
         clearInterval(intervalo)
       }
@@ -73,33 +107,6 @@ var paths = {
   packageJson: path.join(__dirname, 'package.json'),
   cache      : path.join(__dirname, 'cache')
 }
-
-var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
-var listSourcesWebchimera = {
-  darwin: {
-    path : `/PelisTime.app/Contents/Resources/app/${pathModule}`,
-    ico  : 'img/osx.icns',
-    arch : 'x64',
-    bin64: './binVideo/osx-64bits.zip',
-    url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/osx-64bits.zip'
-  },
-  win32 : {
-    path : `/resources/app/${pathModule}`,
-    ico  : 'img/windows.ico',
-    arch : 'all',
-    bin32: './binVideo/win-ia32.zip',
-    bin64: './binVideo/win-64bits.zip'
-  },
-  linux : {
-    path : `/resources/app/${pathModule}`,
-    ico  : 'img/windows.ico',
-    arch : 'x64',
-    bin64: './binVideo/linux-64bits.zip',
-    url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/linux-64bits.zip'
-  }
-}
-
-var sourceWebchimera = listSourcesWebchimera[ platform ]
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
 var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
@@ -168,8 +175,13 @@ packager({
               })
           }else if(dir.indexOf('win32') !== -1) {
             var unzip = require('unzip')
-            fs.createReadStream(sourceWebchimera[ dir.indexOf('ia32') !== -1 ? 'bin32' : 'bin64' ])
-              .pipe(unzip.Extract({ path: `./${dir}${sourceWebchimera.path}` }))
+            var platformType = dir.indexOf('ia32') !== -1 ? 'bin32' : 'bin64'
+            Q.nfcall(fs.stat, sourceWebchimera[ platformType ].path)
+              .catch(() => downloadAsync(sourceWebchimera[ platformType ].url, sourceWebchimera[ platformType ].path))
+              .finally(() => {
+                fs.createReadStream(sourceWebchimera[ platformType ].path)
+                  .pipe(unzip.Extract({ path: `./${dir}${sourceWebchimera.path}` }))
+              })
           }
         })
         .catch(err => {
