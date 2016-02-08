@@ -69,7 +69,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ghondar/PelisTime-Mobile.git"
+    "url": "git+https://github.com/ghondar/PelisTime.git"
   },
   "keywords": [
     "react",
@@ -87,7 +87,7 @@
   "author": "Ghondar <abgv9221@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghondar/PelisTime-Mobile/issues"
+    "url": "https://github.com/ghondar/PelisTime/issues"
   },
-  "homepage": "https://github.com/ghondar/PelisTime-Mobile#readme"
+  "homepage": "https://github.com/ghondar/PelisTime#readme"
 }
