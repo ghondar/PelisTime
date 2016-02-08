@@ -43,7 +43,7 @@ $ npm run start-dev
 
 ## Build and Package
 
-### Quick run: linux or osx
+### Quick run: linux, osx or windows
 
 ```shell
 $ npm run all:linux
@@ -53,9 +53,9 @@ $ npm run all:linux
 $ npm run all:osx
 ```
 
-<!--```shell-->
-<!--$ npm run all:win-->
-<!--```-->
+```shell
+$ npm run all:win
+```
 
 ### Or step by step run
 
@@ -71,11 +71,11 @@ package project:
 $ npm run pack
 ```
 
-<!--create installer on windows:-->
+create installer on windows:
 
-<!--```shell-->
-<!--$ npm run installer:win-->
-<!--```-->
+```shell
+$ npm run installer:win
+```
 
 create installer on osx:
 
