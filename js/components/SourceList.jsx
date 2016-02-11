@@ -14,20 +14,22 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import { Dialog, FlatButton } from 'material-ui'
 
+const progressTorrent = {
+  percent: 0.00,
+  started: false,
+  speed  : '0.0',
+  active : 0,
+  peers  : 0,
+  timeout: false
+}
+
 export default class SourceList extends Component{
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      progressTorrent: {
-        percent: 0.00,
-        started: false,
-        speed  : '0.0',
-        active : 0,
-        peers  : 0,
-        timeout: false
-      },
-      open           : false
+      progressTorrent,
+      open: false
     }
   }
 
@@ -132,12 +134,8 @@ export default class SourceList extends Component{
   _onDialogCancel() {
     global.destroyVideo && global.destroyVideo()
     this.setState({
-      open           : false,
-      progressTorrent: {
-        ...this.state.progressTorrent,
-        speed: '0.0',
-        progress: 0.00
-      }
+      open: false,
+      progressTorrent
     })
   }
 }
