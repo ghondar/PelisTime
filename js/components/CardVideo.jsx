@@ -17,10 +17,6 @@ export default class CardVideo extends Component{
     super(props, context)
   }
 
-  static propTypes = {
-    video: PropTypes.object.isRequired
-  }
-
   render() {
     const { video } = this.props
     const name = video.name.length > 18 ? `${video.name.substr(0, 15)}...` : video.name
@@ -58,4 +54,8 @@ export default class CardVideo extends Component{
       image: video.cover_url
     }, 'details')
   }
+}
+
+CardVideo.propTypes = {
+  video: PropTypes.object.isRequired
 }

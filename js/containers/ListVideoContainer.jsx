@@ -6,8 +6,7 @@ import * as videoActions from '../actions/videoActions'
 // Custom Components
 import ListVideo from '../components/ListVideo.jsx'
 
-@connect(state => state)
-export default class ListVideoContainer extends Component{
+class ListVideoContainer extends Component{
 
   constructor(props, context) {
     super(props, context)
@@ -52,3 +51,5 @@ export default class ListVideoContainer extends Component{
     )
   }
 }
+
+export default connect(state => state)(ListVideoContainer)

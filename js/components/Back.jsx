@@ -10,19 +10,6 @@ export default class Back extends Component{
     super(props, context)
   }
 
-  static propTypes = {
-    history         : PropTypes.object.isRequired,
-    buttonStyle     : PropTypes.object,
-    buttonClassName : PropTypes.string,
-    contentClassName: PropTypes.string
-  }
-
-  static defaultProps = {
-    buttonStyle     : {},
-    buttonClassName : '',
-    contentClassName: ''
-  }
-
   render() {
     const { buttonStyle, buttonClassName, contentClassName } = this.props
 
@@ -45,4 +32,17 @@ export default class Back extends Component{
   _handleBack() {
     this.props.history.goBack()
   }
+}
+
+Back.propTypes = {
+  history         : PropTypes.object.isRequired,
+  buttonStyle     : PropTypes.object,
+  buttonClassName : PropTypes.string,
+  contentClassName: PropTypes.string
+}
+
+Back.defaultProps = {
+  buttonStyle     : {},
+  buttonClassName : '',
+  contentClassName: ''
 }

@@ -31,16 +31,6 @@ export default class SourceList extends Component{
     }
   }
 
-  static propTypes = {
-    sources: PropTypes.array,
-    name   : PropTypes.string
-  }
-
-  static defaultProps = {
-    sources: [],
-    name   : ''
-  }
-
   render() {
     let standardActions = [
       <FlatButton
@@ -142,4 +132,14 @@ export default class SourceList extends Component{
       open: false
     })
   }
+}
+
+SourceList.propTypes = {
+  sources: PropTypes.array,
+  name   : PropTypes.string
+}
+
+SourceList.defaultProps = {
+  sources: [],
+  name   : ''
 }

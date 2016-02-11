@@ -68,5 +68,22 @@ export default class PopupDownload extends Component{
       open: false
     })
   }
+}
 
+PopupDownload.propTypes = {
+  percent: PropTypes.number,
+  started: PropTypes.bool,
+  speed  : PropTypes.string,
+  active : PropTypes.number,
+  peers  : PropTypes.number,
+  timeout: PropTypes.bool
+}
+
+PopupDownload.defaultProps = {
+  percent: 0.00,
+  started: false,
+  speed  : '0kb',
+  active : 0,
+  peers  : 0,
+  timeout: false
 }

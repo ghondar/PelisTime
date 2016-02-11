@@ -17,11 +17,7 @@ export default class HealthTorrent extends Component{
       seeds  : 0
     }
   }
-
-  static propTypes = {
-    url: PropTypes.string.isRequired
-  }
-
+  
   componentDidMount() {
     this.cancelablePromise = this.makeCancelable(torrentHealth(this.props.url))
     this.cancelablePromise
@@ -62,4 +58,8 @@ export default class HealthTorrent extends Component{
       <span>{loading ? <CircularProgress mode='indeterminate' size={0.3} /> : <PointStatus seeds={seeds} peers={peers}/>}</span>
     )
   }
+}
+
+HealthTorrent.propTypes = {
+  url: PropTypes.string.isRequired
 }

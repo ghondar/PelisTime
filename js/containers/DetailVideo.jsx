@@ -14,10 +14,7 @@ import Back from '../components/Back.jsx'
 import noImage from '../../img/no-image.jpg'
 import loadingImage from '../../img/loading_spinner.gif'
 
-@connect(state => ({
-  detailStore: state.detailStore
-}))
-export default class DetailVideo extends Component{
+class DetailVideo extends Component{
 
   constructor(props, context) {
     super(props, context)
@@ -73,3 +70,7 @@ export default class DetailVideo extends Component{
     this.props.history.goBack()
   }
 }
+
+export default connect(state => ({
+  detailStore: state.detailStore
+}))(DetailVideo)

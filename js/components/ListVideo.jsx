@@ -25,10 +25,6 @@ class ListVideo extends Component{
     }
   }
 
-  static propTypes = {
-    videos: PropTypes.array.isRequired
-  }
-
   componentDidMount() {
     document.querySelector('#scroll').addEventListener('scroll', this.onScroll, false)
     this.setState({
@@ -153,6 +149,10 @@ class ListVideo extends Component{
       </div>
     )
   }
+}
+
+ListVideo.propTypes = {
+  videos: PropTypes.array.isRequired
 }
 
 export default InfiniteScrollify(ListVideo)

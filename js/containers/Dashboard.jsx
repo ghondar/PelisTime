@@ -11,11 +11,7 @@ import Toolbar from '../components/Toolbar.jsx'
 // Material Components
 import AppBar from 'material-ui/lib/app-bar'
 
-@connect(state => ({
-  viewStore: state.viewStore,
-  videoStore: state.videoStore
-}))
-export default class Dashboard extends Component{
+class Dashboard extends Component{
 
   constructor(props, context) {
     super(props, context)
@@ -36,3 +32,8 @@ export default class Dashboard extends Component{
     )
   }
 }
+
+export default connect(state => ({
+  viewStore : state.viewStore,
+  videoStore: state.videoStore
+}))(Dashboard)

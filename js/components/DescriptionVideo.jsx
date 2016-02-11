@@ -6,26 +6,6 @@ export default class DescriptionVideo extends Component{
     super(props, context)
   }
 
-  static propTypes = {
-    name    : PropTypes.string,
-    plot    : PropTypes.string,
-    duration: PropTypes.number,
-    rating  : PropTypes.number,
-    type    : PropTypes.string,
-    year    : PropTypes.string,
-    genre   : PropTypes.string
-  }
-
-  static defaultProps = {
-    name    : 'No definido',
-    plot    : 'Sin descripción.',
-    duration: 0,
-    rating  : 0.0,
-    type    : 'Pelicula',
-    year    : '',
-    genre   : 'No defenido'
-  }
-
   render() {
     const { name, plot, type, duration, year, rating, genre } = this.props
 
@@ -41,4 +21,24 @@ export default class DescriptionVideo extends Component{
       </div>
     )
   }
+}
+
+DescriptionVideo.propTypes = {
+  name    : PropTypes.string,
+  plot    : PropTypes.string,
+  duration: PropTypes.number,
+  rating  : PropTypes.number,
+  type    : PropTypes.string,
+  year    : PropTypes.string,
+  genre   : PropTypes.string
+}
+
+DescriptionVideo.defaultProps = {
+  name    : 'No definido',
+  plot    : 'Sin descripción.',
+  duration: 0,
+  rating  : 0.0,
+  type    : 'Pelicula',
+  year    : '',
+  genre   : 'No defenido'
 }
