@@ -16,7 +16,8 @@
     "installer:win": "npm run installer:win:64 && npm run installer:win:32",
     "installer:win:64": "electron-builder dist/PelisTime-win32-x64 --platform=win --out=dist/win-64bits/ --config=config.json",
     "installer:win:32": "electron-builder dist/PelisTime-win32-ia32 --platform=win --out=dist/win-32bits/ --config=config.json",
-    "installer:osx": "electron-builder dist/PelisTime-darwin-x64/PelisTime.app --platform=osx  --out=dist/ --config=config.json"
+    "installer:osx": "electron-builder dist/PelisTime-darwin-x64/PelisTime.app --platform=osx  --out=dist/ --config=config.json",
+    "test": "jscs . && node ./test/index.js"
   },
   "dependencies": {
     "babel-runtime": "5.8.20",
@@ -52,6 +53,7 @@
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "6.5.0",
     "babel-preset-stage-0": "6.5.0",
+    "cheerio": "0.20.0",
     "clean-webpack-plugin": "0.1.4",
     "css-loader": "0.17.0",
     "cssnext-loader": "1.0.1",
@@ -71,6 +73,7 @@
     "redux-devtools-log-monitor": "1.0.4",
     "strip-loader": "0.1.0",
     "style-loader": "0.12.3",
+    "tape": "4.4.0",
     "unzip": "0.1.11",
     "url-loader": "0.5.7",
     "webpack": "1.12.1",

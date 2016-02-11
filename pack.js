@@ -78,8 +78,8 @@ function download(downloadFile, path, cb) {
     total = res.headers[ 'content-length' ]
 
     intervalo = setInterval(function() {
-      progress[path] = ('Downloading ' + path + ': ' + (dlprogress * 100 / total).toFixed(0) + '%')
-      var stringOutput = Object.keys(progress).map(key => progress[key] )
+      progress[ path ] = ('Downloading ' + path + ': ' + (dlprogress * 100 / total).toFixed(0) + '%')
+      var stringOutput = Object.keys(progress).map(key => progress[ key ])
       log(stringOutput.join('\n'))
       if(dlprogress == total) {
         clearInterval(intervalo)

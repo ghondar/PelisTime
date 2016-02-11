@@ -17,7 +17,7 @@ export default class HealthTorrent extends Component{
       seeds  : 0
     }
   }
-  
+
   componentDidMount() {
     this.cancelablePromise = this.makeCancelable(torrentHealth(this.props.url))
     this.cancelablePromise
