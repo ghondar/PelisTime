@@ -9,7 +9,6 @@ var fse = require('fs-extra')
 var spawn = require('child_process').spawn
 var platform = require('os').platform()
 var zipFolder = require('zip-folder')
-var compiler = require('electron-compile')
 
 var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
 var listSourcesWebchimera = {
@@ -106,8 +105,7 @@ function download(downloadFile, path, cb) {
 }
 
 var paths = {
-  packageJson: path.join(__dirname, 'package.json'),
-  cache      : path.join(__dirname, 'cache')
+  packageJson: path.join(__dirname, 'package.json')
 }
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
@@ -115,13 +113,6 @@ var arrayModules = Object.keys(packageJson.dependencies).map(function(dependenci
 var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health|q'
 
 var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img' ].concat(arrayModules)
-
-compiler.init(paths.cache)
-compiler.compileAll('static')
-fs.writeFileSync(
-  path.join(paths.cache, 'settings.json'),
-  JSON.stringify(compiler.collectCompilerInformation())
-)
 
 packager({
   dir             : '.',
