@@ -49,13 +49,20 @@ export default class CardVideo extends Component{
 
   _handleDetail(e) {
     const { video } = this.props
-    this.props.history.pushState({
-      id   : video.id,
-      image: video.cover_url
-    }, 'details')
+    this.context.router.push({
+      pathname : 'details',
+      state    : {
+        id   : video.id,
+        image: video.cover_url
+      }
+    })
   }
 }
 
 CardVideo.propTypes = {
   video: PropTypes.object.isRequired
+}
+
+CardVideo.contextTypes = {
+  router: PropTypes.object
 }

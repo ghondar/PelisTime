@@ -113,10 +113,13 @@ export default class SourceList extends Component{
     readTorrent(this.props.sources[ rowNumber ].url)
       .then(playTorrent)
       .then(href => {
-        this.props.history.pushState({
-          source: href,
-          title : this.props.name
-        }, 'player')
+        this.context.router.push({
+          pathname : 'player',
+          state    : {
+            source: href,
+            title : this.props.name
+          }
+        })
       }, err => {
         this._onDialogCancel.call(this)
       }, info => {
@@ -142,4 +145,8 @@ SourceList.propTypes = {
 SourceList.defaultProps = {
   sources: [],
   name   : ''
+}
+
+SourceList.contextTypes = {
+  router: PropTypes.object
 }

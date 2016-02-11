@@ -30,12 +30,11 @@ export default class Back extends Component{
   }
 
   _handleBack() {
-    this.props.history.goBack()
+    this.context.router.goBack()
   }
 }
 
 Back.propTypes = {
-  history         : PropTypes.object.isRequired,
   buttonStyle     : PropTypes.object,
   buttonClassName : PropTypes.string,
   contentClassName: PropTypes.string
@@ -45,4 +44,8 @@ Back.defaultProps = {
   buttonStyle     : {},
   buttonClassName : '',
   contentClassName: ''
+}
+
+Back.contextTypes = {
+  router: PropTypes.object
 }

@@ -74,7 +74,6 @@ export default class Player extends Component{
         onMouseMove={::this._handlleMouse}
         className='player-container'>
         <Back
-          history={this.props.history}
           buttonStyle={Style.button}
           buttonClassName='player-button' />
         <div

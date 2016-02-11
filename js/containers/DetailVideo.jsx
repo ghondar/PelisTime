@@ -45,8 +45,7 @@ class DetailVideo extends Component{
         />
         <SourceList
           name={name}
-          sources={sources}
-          history={this.props.history} />
+          sources={sources}/>
       </div>
     )
 
@@ -59,7 +58,6 @@ class DetailVideo extends Component{
               className='cover-bg' />
         <div className='cover-shadow'/>
         <Back
-          history={this.props.history}
           contentClassName='margin'/>
         {childComponents}
       </div>
@@ -67,8 +65,12 @@ class DetailVideo extends Component{
   }
 
   _handleBack(e) {
-    this.props.history.goBack()
+    this.context.router.goBack()
   }
+}
+
+DetailVideo.contextTypes = {
+  router: PropTypes.object
 }
 
 export default connect(state => ({

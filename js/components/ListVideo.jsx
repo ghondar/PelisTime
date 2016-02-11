@@ -118,7 +118,7 @@ class ListVideo extends Component{
       let videoList = videos.slice(i, i + chunk).map((video, j) => (
           <div className='col-1-5 clearfix' key={i + j + '-' + video.id}>
             <div className='video'>
-              <CardVideo video={video} history={this.props.history}/>
+              <CardVideo video={video}/>
             </div>
           </div>
         )
