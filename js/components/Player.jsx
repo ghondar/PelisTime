@@ -41,31 +41,20 @@ export default class Player extends Component{
     this.setState({
       timeout: setTimeout(() => {
         this.setState({
-        hide: false
-      })
+          hide: true
+        })
       }, 3000)
     })
   }
 
   showButton() {
     this.setState({
-      hide: true
+      hide: false
     })
     this.hideButton()
   }
 
   render() {
-    const Style = {
-      button: {
-        display: 'none'
-      }
-    }
-
-    if(this.state.hide) {
-      Object.assign(Style.button, {
-        display: 'inline-block'
-      })
-    }
 
     return (
       <div
@@ -73,9 +62,9 @@ export default class Player extends Component{
         onMouseEnter={::this._handlleMouse}
         onMouseMove={::this._handlleMouse}
         className='player-container'>
-        <Back
-          buttonStyle={Style.button}
-          buttonClassName='player-button' />
+        {this.state.hide ? null :
+          <Back
+            buttonClassName='player-button' />}
         <div
           id='player'
           className='player'></div>
