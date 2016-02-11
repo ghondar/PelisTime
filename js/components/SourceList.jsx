@@ -132,7 +132,12 @@ export default class SourceList extends Component{
   _onDialogCancel() {
     global.destroyVideo && global.destroyVideo()
     this.setState({
-      open: false
+      open           : false,
+      progressTorrent: {
+        ...this.state.progressTorrent,
+        speed: '0.0',
+        progress: 0.00
+      }
     })
   }
 }

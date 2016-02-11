@@ -29,30 +29,34 @@ class DetailVideo extends Component{
   }
 
   render() {
-    const { id } = this.props.location.state
+    const { id, image } = this.props.location.state
     const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore[ id ] || { Loading : true }
 
     const childComponents = Loading ? <Spinner simple={true} /> : (
-      <div style={{ margin: 20 }}>
-        <DescriptionVideo
-          name={name}
-          plot={plot}
-          duration={duration}
-          rating={rating}
-          type={type}
-          year={year}
-          genre={genre ? genre.name : ''}
-        />
-        <SourceList
-          name={name}
-          sources={sources}/>
+      <div style={{ margin : 20,
+                    display: 'flex' }}>
+        <img src={image} />
+        <div style={{ margin: 20 }}>
+          <DescriptionVideo
+            name={name}
+            plot={plot}
+            duration={duration}
+            rating={rating}
+            type={type}
+            year={year}
+            genre={genre ? genre.name : ''}
+          />
+          <SourceList
+            name={name}
+            sources={sources}/>
+        </div>
       </div>
     )
 
     return (
       <div className='description'>
         <ReactImageFallback
-              src={this.props.location.state.image}
+              src={image}
               fallbackImage={noImage}
               initialImage={loadingImage}
               className='cover-bg' />
