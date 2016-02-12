@@ -45,7 +45,9 @@ export default class SourceList extends Component{
       const name = /([^\/]+(torrent)$|$)/.exec(source.nombre)[ 0 ].split('.torrent')[ 0 ]
 
       return (
-      <TableRow key={source.nombre}>
+      <TableRow
+          style={{ color: 'rgba(250, 250, 250, 0.9)' }}
+          key={source.nombre}>
         <TableRowColumn>{name}</TableRowColumn>
         <TableRowColumn>{source.def}p</TableRowColumn>
         <TableRowColumn>{source.peso}</TableRowColumn>
@@ -76,6 +78,7 @@ export default class SourceList extends Component{
         </Dialog>
         <Table
           height='300px'
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
           onCellClick={::this._handleRowSelection}
           fixedHeader={true}
           fixedFooter={false}

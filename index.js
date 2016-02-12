@@ -21,7 +21,7 @@ app.on('ready', function() {
   var electronScreen = electron.screen
   var size = electronScreen.getPrimaryDisplay().workAreaSize
   var minWidth = size.width / 1.5
-  var minHeight = size.height / 1.2
+  var minHeight = size.height / 1.13
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width    : size.width,

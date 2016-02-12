@@ -12,12 +12,23 @@ export default class DescriptionVideo extends Component{
     return (
       <div className='disable-text-select'>
         <h2>{name}</h2>
-        <p>{plot}</p>
-        <span>{type},</span>
-        <span> {genre},</span>
-        <span> {duration} minutos,</span>
-        <span> {year},</span>
-        <span> {rating}/10</span>
+        <div className='info-labels'>
+          <div className='line clearfix'>
+            <span className='label'><span translate>Genero:</span>{genre}</span>
+            <span className='label'><span translate>Duración:</span>{duration}MIN</span>
+            <span className='label last'><span translate>Rating:</span><span className='text'>{rating}/10</span></span>
+          </div>
+          <div className='line clearfix'>
+            <span className='label'><span translate>Idioma:</span>Español</span>
+            <span className='label'><span translate>Tipo:</span>{type == 'movie' ? 'Pelicula' : 'Serie'}</span>
+            <span className='label last'><span translate>Año:</span><span className='text'>{year}</span></span>
+          </div>
+        </div>
+        <div className='plot scroll-container' st-navigatable nav-on="{up: 'preventDefault', down: 'preventDefault', left: 'detail-view'}" nav-title='detail-plot' st-key-scroll scroll-child='true' st-nav-if='!showSourcesList' st-full-height>
+          <div className='scroll-box'>
+            <p>{plot}</p>
+          </div>
+        </div>
       </div>
     )
   }
