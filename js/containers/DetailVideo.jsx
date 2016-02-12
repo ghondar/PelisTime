@@ -36,7 +36,7 @@ class DetailVideo extends Component{
       <div style={{ margin    : 20,
                     display   : 'flex',
                     alignItems: 'flex-start' }}>
-        <img src={image} />
+        <img onDragStart={::this._handleDisableDrag} src={image} />
         <div style={{ margin: 20 }}>
           <DescriptionVideo
             name={name}
@@ -67,6 +67,10 @@ class DetailVideo extends Component{
         {childComponents}
       </div>
     )
+  }
+
+  _handleDisableDrag(e) {
+    e.preventDefault()
   }
 
   _handleBack(e) {
