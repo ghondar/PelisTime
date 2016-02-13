@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
+const findParentheses = /(?:\(.*?\))/
+
 export default class DescriptionVideo extends Component{
 
   constructor(props, context) {
@@ -8,10 +10,11 @@ export default class DescriptionVideo extends Component{
 
   render() {
     const { name, plot, type, duration, year, rating, genre } = this.props
+    const nameParsed = name.split(findParentheses)[ 0 ].trim()
 
     return (
       <div className='disable-text-select'>
-        <h2>{name}</h2>
+        <h2>{nameParsed}</h2>
         <div className='info-labels'>
           <div className='line clearfix'>
             <span className='label'><span translate>Genero:</span>{genre}</span>
@@ -20,11 +23,11 @@ export default class DescriptionVideo extends Component{
           </div>
           <div className='line clearfix'>
             <span className='label'><span translate>Idioma:</span>Español</span>
-            <span className='label'><span translate>Tipo:</span>{type == 'movie' ? 'Pelicula' : 'Serie'}</span>
+            <span className='label'><span translate>Tipo:</span>{/(tv|serie.*)/.test(name.toLowerCase()) ? 'Serie' : 'Película'}</span>
             <span className='label last'><span translate>Año:</span><span className='text'>{year}</span></span>
           </div>
         </div>
-        <div className='plot scroll-container' st-navigatable nav-on="{up: 'preventDefault', down: 'preventDefault', left: 'detail-view'}" nav-title='detail-plot' st-key-scroll scroll-child='true' st-nav-if='!showSourcesList' st-full-height>
+        <div className='plot scroll-container'>
           <div className='scroll-box'>
             <p>{plot}</p>
           </div>

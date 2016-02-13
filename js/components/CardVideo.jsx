@@ -11,6 +11,8 @@ import CardTitle from 'material-ui/lib/card/card-title'
 import noImage from '../../img/no-image.jpg'
 import loadingImage from '../../img/loading_spinner.gif'
 
+const findParentheses = /(?:\(.*?\))/
+
 export default class CardVideo extends Component{
 
   constructor(props, context) {
@@ -19,7 +21,8 @@ export default class CardVideo extends Component{
 
   render() {
     const { video } = this.props
-    const name = video.name.length > 18 ? `${video.name.substr(0, 15)}...` : video.name
+    const parsedName = video.name.split(findParentheses)[ 0 ].trim()
+    const name = parsedName.length > 18 ? `${parsedName.substr(0, 15)}...` : parsedName
 
     return (
       <Paper

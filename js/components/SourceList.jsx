@@ -41,13 +41,13 @@ export default class SourceList extends Component{
         secondary={true}
         onTouchTap={::this._onDialogCancel} />
     ]
-    const body = this.props.sources.map(source => {
+    const body = this.props.sources.map((source, key) => {
       const name = /([^\/]+(torrent)$|$)/.exec(source.nombre)[ 0 ].split('.torrent')[ 0 ]
 
       return (
       <TableRow
           style={{ color: 'rgba(250, 250, 250, 0.9)' }}
-          key={source.nombre}>
+          key={key}>
         <TableRowColumn>{name}</TableRowColumn>
         <TableRowColumn>{source.def}p</TableRowColumn>
         <TableRowColumn>{source.peso}</TableRowColumn>
