@@ -53,10 +53,27 @@ export default class Toolbar extends Component{
 
   constructor(props, context) {
     super(props, context)
+    this.onResize = this.onResize.bind(this)
     this.state = {
-      open : false,
-      title: sections.movies[ 0 ].title
+      open   : false,
+      title  : sections.movies[ 0 ].title,
+      leftNav: {
+        docked: false,
+        style : {}
+      }
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize, false)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize, false)
+  }
+
+  onResize() {
+    this._handleSize()
   }
 
   render() {
@@ -82,7 +99,8 @@ export default class Toolbar extends Component{
             fetchVideosSearch={fetchVideosSearch}/>
         </AppBar>
           <LeftNav
-            docked={false}
+            docked={this.state.leftNav.docked}
+            style={this.state.leftNav.style}
             width={200}
             open={this.state.open}
             onRequestChange={open => this.setState({ open })}
@@ -110,6 +128,29 @@ export default class Toolbar extends Component{
     )
   }
 
+  _handleSize() {
+    if(screen.width > window.outerWidth && window.outerWidth > screen.width / 1.2) {
+      this.setState({
+        leftNav: {
+          ...this.state.leftNav,
+          docked: true,
+          style: {
+            top      : 68,
+            boxShadow: 'none'
+          }
+        }
+      })
+    }else {
+      this.setState({
+        leftNav: {
+          ...this.state.leftNav,
+          docked: false,
+          style: {}
+        }
+      })
+    }
+  }
+
   _handleChangeView(json) {
     const { setView, fetchVideos, videoStore } = this.props
     setView(json)
@@ -125,10 +166,7 @@ export default class Toolbar extends Component{
   }
 
   _handleToggle() {
+    this._handleSize()
     this.setState({ open: !this.state.open })
-  }
-
-  _handleClose() {
-    this.setState({ open: false })
   }
 }
