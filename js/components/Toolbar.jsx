@@ -53,7 +53,7 @@ export default class Toolbar extends Component{
 
   constructor(props, context) {
     super(props, context)
-    this.onResize = this.onResize.bind(this)
+    this._handleSize = this._handleSize.bind(this)
     this.state = {
       open   : false,
       title  : sections.movies[ 0 ].title,
@@ -65,15 +65,11 @@ export default class Toolbar extends Component{
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.onResize, false)
+    window.addEventListener('resize', this._handleSize, false)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize, false)
-  }
-
-  onResize() {
-    this._handleSize()
+    window.removeEventListener('resize', this._handleSize, false)
   }
 
   render() {

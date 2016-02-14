@@ -8,14 +8,17 @@ export default class Player extends Component{
 
   constructor(props, context) {
     super(props, context)
+    this.onKeyDown = this.onKeyDown.bind(this)
     this.state = {
-      hide   : false,
+      hide   : true,
       timeout: null
     }
   }
 
   componentDidMount() {
     const { source, title } = this.props.location.state
+    document.addEventListener('keydown', this.onKeyDown)
+
     this.player = new Wjs('#player').addPlayer({ autoplay: true })
     this.player.addPlaylist({
       url  : source,
@@ -26,11 +29,26 @@ export default class Player extends Component{
   componentWillUnmount() {
     const timeout = this.state.timeout
 
+    document.removeEventListener('keydown', this.onKeyDown, false)
+
     if(timeout)
       clearTimeout(timeout)
 
     global.destroyVideo && global.destroyVideo()
     this.player.stop()
+  }
+
+  onKeyDown(e) {
+    const keyCode = e.keyCode || e.which
+
+    if (keyCode === 32) {
+      e.preventDefault()
+      this.togglePlay()
+    }
+  }
+
+  togglePlay() {
+    this.player.togglePause()
   }
 
   hideButton() {
