@@ -112,7 +112,7 @@ var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
 var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
 var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health|q'
 
-var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img' ].concat(arrayModules)
+var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img', 'electron-packager' ].concat(arrayModules)
 
 packager({
   dir             : '.',
