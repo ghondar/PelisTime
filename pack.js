@@ -10,7 +10,7 @@ var spawn = require('child_process').spawn
 var platform = require('os').platform()
 var zipFolder = require('zip-folder')
 
-var pathModule = 'node_modules/wcjs-player/node_modules/wcjs-renderer/node_modules/'
+var pathModule = 'node_modules/'
 var listSourcesWebchimera = {
   darwin: {
     path : `/PelisTime.app/Contents/Resources/app/${pathModule}`,
@@ -110,7 +110,7 @@ var paths = {
 
 var packageJson = JSON.parse(fs.readFileSync(paths.packageJson, 'utf8'))
 var arrayModules = Object.keys(packageJson.dependencies).map(function(dependencie) { return `node_modules/${dependencie}` })
-var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health|q'
+var accetedModules = 'wcjs-player|peerflix|read-torrent|torrent-health|q|deep-equal|query-string|strict-uri-encode'
 
 var nodeModuleIgnores = [ 'js', 'binVideo', 'css', 'dist', 'docs', 'fonts', 'img', 'electron-packager' ].concat(arrayModules)
 
@@ -183,4 +183,3 @@ packager({
     }
   })
 })
-
