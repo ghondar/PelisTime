@@ -19,7 +19,7 @@ export default class DescriptionVideo extends Component{
           <div className='line clearfix'>
             <span className='label'><span translate>Genero:</span>{genre}</span>
             <span className='label'><span translate>Duración:</span>{duration}MIN</span>
-            <span className='label last'><span translate>Rating:</span><span className='text'>{rating}/10</span></span>
+            <span className='label last'><span translate>Rating:</span><span className='text'>{`${rating}/10`}</span></span>
           </div>
           <div className='line clearfix'>
             <span className='label'><span translate>Idioma:</span>Español</span>
