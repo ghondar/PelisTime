@@ -10,17 +10,17 @@ var spawn = require('child_process').spawn
 var platform = require('os').platform()
 var zipFolder = require('zip-folder')
 
-var pathModule = 'node_modules/'
+var pathModule = '/app/node_modules/'
 var listSourcesWebchimera = {
   darwin: {
-    path : `/PelisTime.app/Contents/Resources/app/${pathModule}`,
+    path : `/PelisTime.app/Contents/Resources${pathModule}`,
     ico  : 'img/osx.icns',
     arch : 'x64',
     bin64: './binVideo/osx-64bits.zip',
     url  : 'https://github.com/ghondar/PelisTime/releases/download/V1.0.3/osx-64bits.zip'
   },
   win32 : {
-    path : `/resources/app/${pathModule}`,
+    path : `/resources${pathModule}`,
     ico  : 'img/windows.ico',
     arch : 'all',
     bin32: {
@@ -33,7 +33,7 @@ var listSourcesWebchimera = {
     }
   },
   linux : {
-    path : `/resources/app/${pathModule}`,
+    path : `/resources${pathModule}`,
     ico  : 'img/windows.ico',
     arch : 'x64',
     bin64: './binVideo/linux-64bits.zip',
