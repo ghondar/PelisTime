@@ -5,12 +5,7 @@ Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con
 
 
 ## Previus config
-* the project only work on npm@2.x.x
-```shell
-$ sudo npm install -g npm@2.x.x
-```
-
-* if you want compile webchimera, more info [Here](https://github.com/RSATom/WebChimera.js)
+if you want compile webchimera, more info [Here](https://github.com/RSATom/WebChimera.js)
 
 ## Setup
 ```shell
