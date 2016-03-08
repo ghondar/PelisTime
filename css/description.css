@@ -5,24 +5,29 @@
 .margin{
   margin: 10px;
 }
+
 h2 {
   font-weight: 300;
   font-size: 50px;
   line-height: 1.3;
 }
+
 .year {
   font-size: 24px;
   color: rgba(255, 255, 255, 0.5);
 }
+
 .info-labels {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin: 10px 0;
   padding: 10px 0;
 }
+
 .line {
   line-height: 34px;
 }
+
 .line .label {
   float: left;
   display: block;
@@ -31,29 +36,36 @@ h2 {
   vertical-align: top;
   letter-spacing: normal;
 }
+
 .line .label span:not(.text) {
   color: rgba(255, 255, 255, 0.5);
   padding-right: 10px;
 }
+
 .line .label.text-overflow {
   float: none;
   display: block;
 }
+
 .line .label.text-overflow span {
   display: block;
 }
+
 .line .label.text-overflow span:first-child {
   float: left;
 }
+
 .line .label.text-overflow .text {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+
 .line .label.text-overflow.float-right {
   float: right;
   max-width: 40%;
 }
+
 .line .label.text-overflow.float-right:before {
   height: 8px;
   width: 8px;
@@ -63,6 +75,7 @@ h2 {
   content: '';
   float: left;
 }
+
 .line .label:not(.last):after {
   height: 8px;
   width: 8px;
@@ -73,17 +86,21 @@ h2 {
   display: inline-block;
   vertical-align: middle;
 }
+
 .plot {
   margin: 0 -8px 40px;
   font-family: 'Roboto Condensed';
   letter-spacing: normal;
 }
+
 .plot > div {
   height: 100%;
 }
+
 .plot p:first-child {
   margin-top: 0;
 }
+
 .plot p:last-child {
   margin-bottom: 0;
 }

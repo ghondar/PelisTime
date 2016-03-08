@@ -1,67 +1,59 @@
-/* BEGIN Light */
 @font-face {
   font-family: 'Oswald';
   src: url('../fonts/Oswald-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
-/* END Light */
-/* BEGIN Regular */
+
 @font-face {
   font-family: 'Oswald';
   src: url('../fonts/Oswald-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-/* END Regular */
-/* BEGIN Bold */
+
 @font-face {
   font-family: 'Oswald';
   src: url('../fonts/Oswald-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
-/* END Bold */
-/* BEGIN Medium */
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Medium.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
-/* END Medium */
-/* BEGIN Medium Italic */
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-MediumItalic.ttf') format('truetype');
   font-weight: 600;
   font-style: italic;
 }
-/* END Bold Italic */
-/* BEGIN Bold */
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
-/* END Bold */
-/* BEGIN Light */
+
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
-/* END Light */
-/* BEGIN Light Italic */
+
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('../fonts/RobotoCondensed-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
 }
-/* END Light Italic */
+
 @font-face {
   font-family: 'entypo';
   src: url('../fonts/entypo.eot');
@@ -135,20 +127,24 @@ a {
   font-weight: 300;
   text-decoration: none;
 }
+
 p {
   font-weight: 300;
   line-height: 1.4;
   margin: 15px 0;
   font-size: 22px;
 }
+
 h1 {
   font-size: 40px;
   font-weight: 300;
 }
+
 h2 {
   font-size: 36px;
   font-weight: 300;
 }
+
 h3 {
   font-weight: 300;
   font-size: 24px;

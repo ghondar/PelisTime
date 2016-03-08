@@ -1,11 +1,8 @@
 .padder {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-.content {
-  
-  /* position: absolute; */
-  
+.content {  
   margin: 0 auto;
 }
 
