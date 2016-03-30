@@ -1,5 +1,4 @@
 {
-  "esprima": "esprima-fb",
   "fileExtensions": [".js", ".jsx"],
   "excludeFiles": ["node_modules/**", "bower_components/**", "static/**"],
 
