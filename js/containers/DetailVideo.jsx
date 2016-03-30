@@ -33,11 +33,9 @@ class DetailVideo extends Component{
     const { name, plot, duration, rating, type, year, genre, sources, Loading } = this.props.detailStore[ id ] || { Loading : true }
 
     const childComponents = Loading ? <Spinner simple={true} /> : (
-      <div style={{ margin    : 20,
-                    display   : 'flex',
-                    alignItems: 'flex-start' }}>
-        <img onDragStart={::this._handleDisableDrag} src={image} />
-        <div style={{ margin: 20 }}>
+      <div className='container-description'>
+        <img className='image-description' onDragStart={::this._handleDisableDrag} src={image} />
+        <div className='container-right-description'>
           <DescriptionVideo
             name={name}
             plot={plot}

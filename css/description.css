@@ -6,6 +6,20 @@
   margin: 10px;
 }
 
+.container-description{
+  margin: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.container-right-description{
+  margin: 20px;
+}
+
+.image-description{
+  width: 300px;
+}
+
 h2 {
   font-weight: 300;
   font-size: 50px;
