@@ -3,6 +3,10 @@
   font-family: Roboto;
 }
 
+th:first-child, td:first-child {
+  width: 300px;
+}
+
 .dialog-source-list{
   text-align: center;
   color: black;
