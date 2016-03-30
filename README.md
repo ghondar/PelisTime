@@ -75,3 +75,8 @@ create installer on osx:
 ```shell
 $ npm run installer:osx
 ```
+
+#### Build output
+```
+./tmp/...
+```
