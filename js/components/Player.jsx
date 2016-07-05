@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Wjs from 'wcjs-player'
+import wcjs from 'wcjs-prebuilt'
 
 // Custom Components
 import Back from '../components/Back.jsx'
@@ -19,7 +20,10 @@ export default class Player extends Component{
     const { source, title } = this.props.location.state
     document.addEventListener('keydown', this.onKeyDown)
 
-    this.player = new Wjs('#player').addPlayer({ autoplay: true })
+    this.player = new Wjs('#player').addPlayer({
+      autoplay: true,
+      wcjs
+    })
     this.player.addPlaylist({
       url  : source,
       title: title

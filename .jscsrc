@@ -3,7 +3,6 @@
   "excludeFiles": ["node_modules/**", "bower_components/**", "static/**"],
 
   /*EcmaScript next generation Activated*/
-  "esnext": true,
   "requireShorthandArrowFunctions": true,
 
   /* RULES */
@@ -123,7 +122,6 @@
     "catch"
   ],
   "requireSpaceBeforeObjectValues": true,
-  "requireObjectKeysOnNewLine": true,
   "requireAlignedObjectValues": "all",
   "requireSpacesInsideArrayBrackets": "all",
   "requireSpacesInsideObjectBrackets": "all",

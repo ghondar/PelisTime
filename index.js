@@ -1,9 +1,11 @@
-var app = require('app')  // Module to control application life.
-var BrowserWindow = require('browser-window')  // Module to create native browser window.
 var electron = require('electron')
+var { app, BrowserWindow } = electron
 
 // Report crashes to our server.
-require('crash-reporter').start()
+// crashReporter.start({
+//   productName: 'PelisTime',
+//   companyName: 'PelisTime inc.'
+// })
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the javascript object is GCed.
@@ -15,9 +17,7 @@ app.on('window-all-closed', function() {
   app.quit()
 })
 
-// This method will be called when Electron has done everything
-// initialization and ready for creating browser windows.
-app.on('ready', function() {
+function createWindow() {
   var electronScreen = electron.screen
   var size = electronScreen.getPrimaryDisplay().workAreaSize
   var minWidth = size.width / 1.5
@@ -39,7 +39,7 @@ app.on('ready', function() {
   }
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools()
+    mainWindow.webContents.openDevTools()
   }
 
   // Emitted when the window is closed.
@@ -49,4 +49,16 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+}
+
+// This method will be called when Electron has done everything
+// initialization and ready for creating browser windows.
+app.on('ready', createWindow)
+
+app.on('activate', () => {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (win === null) {
+    createWindow()
+  }
 })
