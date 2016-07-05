@@ -1,7 +1,7 @@
 # PelisTime
 Un espacio multimedia basado en peerflix, Webchimera.js, React y empaquetado con electron.
 
-![](https://media.giphy.com/media/26FPIiWbFzMWMP90Q/giphy.gif)
+http://i.giphy.com/26FPIiWbFzMWMP90Q.gif
 
 
 ## Previus config
