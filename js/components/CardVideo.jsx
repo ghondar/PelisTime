@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import ReactImageFallback from 'react-image-fallback'
 
 // Material Components
-import Card from 'material-ui/lib/card/card'
-import Paper from 'material-ui/lib/paper'
-import CardMedia from 'material-ui/lib/card/card-media'
-import CardTitle from 'material-ui/lib/card/card-title'
+import { Card, CardMedia, CardTitle} from 'material-ui/Card'
+import Paper from 'material-ui/Paper'
 
 // Assets
 import noImage from '../../img/no-image.jpg'

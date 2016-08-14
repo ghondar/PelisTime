@@ -4,9 +4,8 @@ import { Router, hashHistory } from 'react-router'
 import configureStore from '../store/configureStore'
 import routes from '../routes/routes.jsx'
 
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
-import themeDecorator from 'material-ui/lib/styles/theme-decorator'
-import colors from 'material-ui/lib/styles/colors'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 const muiTheme = getMuiTheme({}, {
   tableRow : {
@@ -16,14 +15,14 @@ const muiTheme = getMuiTheme({}, {
 
 const store = configureStore()
 
-class App extends Component{
+export default class App extends Component{
   render() {
     return (
-      <Provider store={store}>
-        <Router history={hashHistory}>{routes}</Router>
-      </Provider>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+          <Router history={hashHistory}>{routes}</Router>
+        </Provider>
+      </MuiThemeProvider>
     )
   }
 }
-
-export default themeDecorator(muiTheme)(App)

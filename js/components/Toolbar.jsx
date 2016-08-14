@@ -4,12 +4,11 @@ import React, { PropTypes, Component } from 'react'
 import SearchBox from './SearchBox.jsx'
 
 // Material Components
-import AppBar from 'material-ui/lib/app-bar'
-import LeftNav from 'material-ui/lib/left-nav'
-import MenuItem from 'material-ui/lib/menus/menu-item'
-import Divider from 'material-ui/lib/divider'
-import List from 'material-ui/lib/lists/list'
-import ListItem from 'material-ui/lib/lists/list-item'
+import AppBar from 'material-ui/AppBar'
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import Divider from 'material-ui/Divider'
+import { List, ListItem } from 'material-ui/List'
 
 const sections = {
   movies : [
@@ -55,9 +54,9 @@ export default class Toolbar extends Component{
     super(props, context)
     this._handleSize = this._handleSize.bind(this)
     this.state = {
-      open   : false,
-      title  : sections.movies[ 0 ].title,
-      leftNav: {
+      open  : false,
+      title : sections.movies[ 0 ].title,
+      drawer: {
         docked: false,
         style : {}
       }
@@ -94,9 +93,9 @@ export default class Toolbar extends Component{
             viewStore={viewStore}
             fetchVideosSearch={fetchVideosSearch}/>
         </AppBar>
-          <LeftNav
-            docked={this.state.leftNav.docked}
-            style={this.state.leftNav.style}
+          <Drawer
+            docked={this.state.drawer.docked}
+            containerStyle={this.state.drawer.style}
             width={200}
             open={this.state.open}
             onRequestChange={open => this.setState({ open })}
@@ -119,16 +118,16 @@ export default class Toolbar extends Component{
               />
             ))}
           </List>
-        </LeftNav>
+        </Drawer>
       </div>
     )
   }
 
   _handleSize() {
-    if(screen.width > window.outerWidth && window.outerWidth > screen.width / 1.2) {
+    if(screen.width >= window.outerWidth && window.outerWidth >= screen.width / 1.2) {
       this.setState({
-        leftNav: {
-          ...this.state.leftNav,
+        drawer: {
+          ...this.state.drawer,
           docked: true,
           style: {
             top      : 68,
@@ -138,8 +137,8 @@ export default class Toolbar extends Component{
       })
     }else {
       this.setState({
-        leftNav: {
-          ...this.state.leftNav,
+        drawer: {
+          ...this.state.drawer,
           docked: false,
           style: {}
         }

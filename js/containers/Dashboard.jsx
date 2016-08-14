@@ -9,7 +9,7 @@ import ListVideoContainer from './ListVideoContainer.jsx'
 import Toolbar from '../components/Toolbar.jsx'
 
 // Material Components
-import AppBar from 'material-ui/lib/app-bar'
+import AppBar from 'material-ui/AppBar'
 
 class Dashboard extends Component{
 

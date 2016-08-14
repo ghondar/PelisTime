@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
 // Material Components
-import CircularProgress from 'material-ui/lib/circular-progress'
+import CircularProgress from 'material-ui/CircularProgress'
 
 export default class Spinner extends Component{
 

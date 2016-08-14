@@ -5,7 +5,7 @@ import torrentHealth from 'torrent-health'
 import PointStatus from '../components/PointStatus.jsx'
 
 // Material Components
-import CircularProgress from 'material-ui/lib/circular-progress'
+import CircularProgress from 'material-ui/CircularProgress'
 
 export default class HealthTorrent extends Component{
 

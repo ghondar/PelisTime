@@ -17,14 +17,14 @@ export default class DescriptionVideo extends Component{
         <h2>{nameParsed}</h2>
         <div className='info-labels'>
           <div className='line clearfix'>
-            <span className='label'><span translate>Genero:</span>{genre}</span>
-            <span className='label'><span translate>Duración:</span>{duration}MIN</span>
-            <span className='label last'><span translate>Rating:</span><span className='text'>{`${rating}/10`}</span></span>
+            <span className='label'><span>Genero:</span>{genre}</span>
+            <span className='label'><span>Duración:</span>{duration}MIN</span>
+            <span className='label last'><span>Rating:</span><span className='text'>{`${rating}/10`}</span></span>
           </div>
           <div className='line clearfix'>
-            <span className='label'><span translate>Idioma:</span>Español</span>
-            <span className='label'><span translate>Tipo:</span>{/(tv|serie.*)/.test(name.toLowerCase()) ? 'Serie' : 'Película'}</span>
-            <span className='label last'><span translate>Año:</span><span className='text'>{year}</span></span>
+            <span className='label'><span>Idioma:</span>Español</span>
+            <span className='label'><span>Tipo:</span>{/(tv|serie.*)/.test(name.toLowerCase()) ? 'Serie' : 'Película'}</span>
+            <span className='label last'><span>Año:</span><span className='text'>{year}</span></span>
           </div>
         </div>
         <div className='plot scroll-container'>

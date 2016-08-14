@@ -5,14 +5,10 @@ import { playTorrent, readTorrent } from '../utils/playtorrent'
 import HealthTorrent from '../components/HealthTorrent.jsx'
 
 // Material Compoennts
-import Table from 'material-ui/lib/table/table'
-import TableBody from 'material-ui/lib/table/table-body'
-import TableHeader from 'material-ui/lib/table/table-header'
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column'
-import TableRow from 'material-ui/lib/table/table-row'
-import TableRowColumn from 'material-ui/lib/table/table-row-column'
-import LinearProgress from 'material-ui/lib/linear-progress'
-import { Dialog, FlatButton } from 'material-ui'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import LinearProgress from 'material-ui/LinearProgress'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 
 const progressTorrent = {
   percent: 0.00,
@@ -38,7 +34,6 @@ export default class SourceList extends Component{
       <FlatButton
         key='cancel'
         label='Cancel'
-        secondary={true}
         onTouchTap={::this._onDialogCancel} />
     ]
     const body = this.props.sources.map((source, key) => {
