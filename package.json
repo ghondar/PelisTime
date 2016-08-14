@@ -9,14 +9,14 @@
     "start": "electron .",
     "start-dev": "NODE_ENV=development DEBUG=true electron .",
     "all:linux": "npm run build && npm run pack",
-    "all:osx": "npm run build && npm run pack && npm run installer:osx",
+    "all:osx": "npm run build && npm run installer:osx",
     "all:win": "npm run build && npm run pack && npm run installer:win",
     "build": "webpack --config webpack.config.production.js",
     "pack": "node pack.js",
     "installer:win": "npm run installer:win:64 && npm run installer:win:32",
     "installer:win:64": "electron-builder dist/PelisTime-win32-x64 --platform=win --out=dist/win-64bits/ --config=config.json",
     "installer:win:32": "electron-builder dist/PelisTime-win32-ia32 --platform=win --out=dist/win-32bits/ --config=config.json",
-    "installer:osx": "build dist/PelisTime-darwin-x64/PelisTime.app -w",
+    "installer:osx": "build -m",
     "test": "jscs . && node ./test/index.js"
   },
   "dependencies": {
