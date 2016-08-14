@@ -9,8 +9,7 @@ var { app, BrowserWindow } = electron
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the javascript object is GCed.
-var mainWindow = null
-
+let mainWindow
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // if (process.platform != 'darwin')
@@ -58,7 +57,7 @@ app.on('ready', createWindow)
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow()
   }
 })
